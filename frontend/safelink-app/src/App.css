@@ -1,0 +1,137 @@
+/* ===== SafeLink – CSS unificado e otimizado =====
+   Cobre: Navbar, Layout (sticky footer), Containers, Grids, Formulários,
+   Home (reputação + rankings), Verify, Report, Guide, Login, Signups.
+   --------------------------------------------------------------- */
+
+/* Tema e base */
+:root{
+  --bg:#f7f7fb; --fg:#0f172a; --muted:#6b7280; --card:#fff; --border:#e5e7eb;
+  --accent:#4f46e5; --accent-700:#4338ca; --danger:#991b1b; --success:#065f46;
+  --radius:16px; --shadow:0 10px 24px rgba(2,6,23,.08);
+  --container-max:1280px;             /* ajuste a largura geral do site aqui */
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0; font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Ubuntu;
+  color:var(--fg); background:var(--bg);
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+  overflow-y: scroll;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ===== Layout geral (sticky footer) ===== */
+.app{min-height:100vh; display:flex; flex-direction:column}
+.app>main{flex:1}
+.container{max-width:var(--container-max); margin:auto; margin-left: 25%; margin-right: 25%; padding:0 24px}
+.page{padding:40px 0}
+.section{margin-bottom:40px}
+.section h2{margin:0 0 6px; font-size:24px}
+.card{
+  background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+  box-shadow:var(--shadow); padding:20px;
+}
+.footer{
+  border-top:1px solid var(--border); background:#fff; text-align:center;
+  font-size:12px; color:var(--muted); padding:24px 0;
+}
+
+/* ===== Navbar (alinhada ao mesmo grid do container) ===== */
+#nav{position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border)}
+#nav-inner{
+  max-width:var(--container-max); margin:auto; margin-left: 25%; margin-right: 25%; padding:0 24px; height:64px;
+  display:flex; align-items:center; justify-content:flex-start; gap:24px;
+}
+#nav-inner>label{display:inline-flex; align-items:center; gap:8px; font-weight:800; color:var(--fg)}
+#tabs{display:flex; flex-wrap:wrap; align-items:center; column-gap:20px; row-gap:10px; margin-left:auto;}
+#tabs .tab{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:10px 14px; border-radius:12px; color:#111827; transition:background .15s,color .15s;
+}
+#tabs .tab:hover{background:#f3f4f6}
+#tabs .tab.active{background:#eef2ff; color:#3730a3; font-weight:700}
+#tabs .tab img{width:22px; height:22px; object-fit:contain; display:block}
+
+/* ===== Utilitários reutilizados em todas as telas ===== */
+.muted{color:var(--muted)} .small{font-size:12px} .mt{margin-top:12px}
+.inline{display:inline-flex; align-items:center; gap:8px}
+.between{display:flex; align-items:center; justify-content:space-between}
+.end{display:flex; justify-content:flex-end}
+.hint{font-size:12px; color:var(--muted); margin-top:8px}
+.label{display:block; font-size:14px; margin:2px 0 6px; color:#111827}
+.hero-title{margin:0 0 16px; font-size:28px; font-weight:800; letter-spacing:.2px}
+
+/* ===== Grids e formulários ===== */
+.row{display:grid; gap:12px}
+.grid-2{grid-template-columns:1fr}
+.grid-3{grid-template-columns:1fr}
+.grid-4{grid-template-columns:1fr}   /* rankings por tipo: sempre empilhado */
+@media (min-width:860px){
+  .grid-2{grid-template-columns:1fr 1fr}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+}
+:where(input[type="text"],input[type="url"],input[type="datetime-local"],input[type="password"],select,textarea){
+  width:100%; padding:12px 14px; border:1px solid var(--border); border-radius:12px; background:#fff; outline:none;
+}
+:where(input,select,textarea):focus{border-color:var(--accent); box-shadow:0 0 0 3px rgb(79 70 229 / .15)}
+textarea{resize:vertical}
+.btn{display:inline-block; padding:10px 14px; border-radius:12px; background:var(--accent); color:#fff; border:0}
+.btn:hover{background:var(--accent-700)}
+
+/* ===== Componentes de “estado” e chips ===== */
+.pill{display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px; font-weight:700}
+.pill.low{background:#dcfce7; color:var(--success)}
+.pill.mid{background:#fef3c7; color:#92400e}
+.pill.high{background:#fee2e2; color:var(--danger)}
+.dot{width:8px; height:8px; border-radius:999px; background:currentColor; display:inline-block}
+.chips{display:inline-flex; gap:6px}
+.chip{display:inline-flex; align-items:center; padding:2px 8px; font-size:12px; border-radius:999px; background:#f3f4f6; color:#111827}
+.chip.red{background:#fee2e2; color:var(--danger)}
+.note{margin-top:12px; padding:12px; border-radius:12px; background:#f9fafb}
+.note.success{background:#ecfdf5; color:var(--success)}
+.flags{display:grid; gap:10px; grid-template-columns:1fr}
+@media (min-width:860px){.flags{grid-template-columns:1fr 1fr}}
+.flag{padding:12px; border-radius:12px; background:#f9fafb; border:1px solid var(--border)}
+
+/* ===== Bloco “resultado de validação” (Home/Verify) ===== */
+.sample{margin-top:16px}
+.sample-head{display:flex; align-items:center; justify-content:flex-start; gap:12px; margin-bottom:8px}
+
+/* ===== Listas, relatórios e rankings ===== */
+.reports,.rank{list-style:none; padding:0; margin:0}
+.reports{display:grid; gap:10px}
+.report{border:1px solid var(--border); border-radius:12px; padding:12px; background:#fff}
+.report-head{display:flex; align-items:center; justify-content:space-between}
+.rank li{display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border)}
+.rank li span{width:24px; text-align:right; margin-right:8px}
+.rank li em{color:var(--muted); font-style:normal}
+
+/* Mapa placeholder (Home/Map) */
+.map{
+  min-height:220px; display:flex; align-items:center; justify-content:center;
+  background:#eef2ff; color:#4338ca; border-radius:12px; border:1px dashed #c7d2fe;
+}
+
+/* Ranking por tipo (Home): tag | valor | contagem */
+.rank.rank-items li{
+  display:grid; grid-template-columns:120px 1fr auto; align-items:center; gap:10px 16px;
+  padding:10px 0; border-bottom:1px solid var(--border);
+}
+.rank.rank-items code{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  background:#f3f4f6; padding:6px 10px; border-radius:8px; color:#111827;
+}
+.tag{
+  display:inline-flex; align-items:center; justify-content:center; min-width:96px;
+  padding:2px 8px; font-size:12px; border-radius:999px; background:#f3f4f6; color:#111827;
+  text-transform:uppercase; letter-spacing:.02em; white-space:nowrap;
+}
+.tag.domain{background:#dbeafe; color:#1e40af}
+.tag.phone{background:#e5e7eb; color:#111827}
+.tag.pix{background:#dcfce7; color:#065f46}
+.tag.handle{background:#ede9fe; color:#5b21b6}
+
+/* ===== Regras fixas do Navbar (imagens) ===== */
+#tab-profile{width:22px; height:22px; object-fit:contain; display:block}
+#brand{height:28px; width:auto; display:block}
