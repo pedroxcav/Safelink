@@ -10,11 +10,11 @@ import { Link } from 'react-router-dom';
 
 export default function Verify() {
   return (
-    <Section title="Validador de Links" subtitle="Cole o link para verificar riscos, reputação e autenticidade. (Protótipo)">
+    <Section title="Validador de Fontes" subtitle="Cole o link para verificar riscos, reputação e autenticidade.">
       <Card>
         <FormRow cols={2}>
           <Input type="url" placeholder="https://exemplo.com/presente" aria-label="URL para validar" />
-          <Button disabled>Validar (conectar backend)</Button>
+          <Button disabled>Validar</Button>
         </FormRow>
 
         <div className="hint">Dica: prefira domínios oficiais e evite informar dados sensíveis.</div>
@@ -23,10 +23,10 @@ export default function Verify() {
           <ResultHeader pill={{ level:'low', text:'Risco BAIXO (21)' }} />
           <Flags items={[
             { title:'Campanha oficial verificada', desc:'Assinatura válida informada pela empresa.' },
-            { title:'Link encurtado', desc:'URL curta com assinatura/verificação.' },
+            { title:'Link encurtado', desc:'URL curta com assinatura/verificação.' }
           ]}/>
           <Note>Não encontramos sinais fortes de risco. Ainda assim, confira o endereço e não compartilhe dados pessoais.</Note>
-          <div className="between muted">
+          <div className="between muted mt">
             <span>Comunidade: 0 relatos</span>
             <Link to="/report">Denunciar este link</Link>
           </div>

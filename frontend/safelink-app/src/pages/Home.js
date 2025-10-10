@@ -21,7 +21,7 @@ export default function Home() {
               <option>@Perfil</option>
             </Select>
             <Input type="text" placeholder="ex.: exemplo.com ou @perfil" aria-label="Valor para consulta" />
-            <Button disabled>Buscar</Button>
+            <Button>Buscar</Button>
           </FormRow>
 
           <div className="sample">
