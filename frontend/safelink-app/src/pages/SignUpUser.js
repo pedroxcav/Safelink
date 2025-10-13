@@ -26,12 +26,12 @@ export default function SignUpUser() {
         <div className="row">
           <label className="inline">
             <input type="checkbox" /> Aceito os <Link to="/terms" target="_blank" rel="noreferrer">Termos</Link> e a{" "}
-            <Link to="/privacy" target="_blank" rel="noreferrer">Privacidade</Link>.
+            <Link to="/privacy" target="_blank" rel="noreferrer">Privacidade.</Link>
           </label>
         </div>
 
         <div className="row end"><Button type="submit">Criar conta</Button></div>
-        <div className="hint mt">Já possui conta? <Link to="/login">Entrar</Link></div>
+        <div className="hint mt">Já possui conta?<Link to="/login">Entrar</Link></div>
       </Card>
     </Section>
   );

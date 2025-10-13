@@ -1,4 +1,3 @@
-// src/components/Navbar.jsx
 import { NavLink } from "react-router-dom";
 import logo from "../media/logo.png";
 
@@ -6,7 +5,6 @@ export default function Navbar() {
   return (
     <header id="nav" role="banner" aria-label="Barra de navegação">
       <div id="tabs">
-        {/* Marca */}
         <NavLink to="/" aria-label="SafeLink - Início" className="brand-link">
           <div id="brand">
             <img src={logo} alt="Logo SafeLink" />
@@ -14,7 +12,6 @@ export default function Navbar() {
           <span id="brand-name">Safelink</span>
         </NavLink>
 
-        {/* Opções */}
         <NavLink
           to="/"
           className={({ isActive }) => "tab" + (isActive ? " active" : "")}
@@ -39,7 +36,6 @@ export default function Navbar() {
           Relatar
         </NavLink>
 
-        {/* Login / Perfil (sem avatar) */}
         <NavLink
           to="/login"
           className={({ isActive }) => "tab" + (isActive ? " active" : "")}

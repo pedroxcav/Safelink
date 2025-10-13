@@ -1,12 +1,4 @@
-/* ===========================
-   SafeLink - App.css (v1.2a)
-   Marca primária: #4338CA
-   =========================== */
-
-
-/* -------- Design Tokens -------- */
 :root{
-  /* Cores base (modo escuro por padrão) */
   --bg: #0B0F17;
   --panel: #0E1626;
   --elev: #121B2E;
@@ -14,7 +6,6 @@
   --text: #E6E8EE;
   --muted: #9AA4BE;
 
-  /* Marca e estados */
   --brand: #4338CA;
   --brand-600: #4F46E5;
   --brand-700: #3730A3;
@@ -23,17 +14,14 @@
   --danger: #EF4444;
   --info: #38BDF8;
 
-  /* Elementos */
   --chip: #0F172A;
   --note: #0A1A2A;
 
-  /* Tipografia e radius */
   --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji","Segoe UI Emoji";
   --radius: 14px;
   --radius-sm: 10px;
   --radius-lg: 18px;
 
-  /* Espaçamento */
   --sp-1: 6px;
   --sp-2: 10px;
   --sp-3: 14px;
@@ -41,39 +29,20 @@
   --sp-5: 24px;
   --sp-6: 32px;
 
-  /* Sombras */
   --shadow-1: 0 8px 24px rgba(0,0,0,.25);
   --shadow-2: 0 16px 40px rgba(0,0,0,.32);
 
-  /* Foco acessível */
   --focus: 0 0 0 3px rgba(67,56,202,.35), 0 0 0 1.2px var(--brand);
-
-  /* Navbar sizing */
   --nav-height: 60px;
   --nav-maxw: 1140px;
   --nav-pad-x: 20px;
-  --nav-logo-size: 28px;   /* desktop */
-  --nav-avatar-size: 30px; /* desktop (mantido caso volte avatar) */
+  --nav-logo-size: 28px;   
+  --nav-avatar-size: 30px; 
 
   --margin: auto 25vw auto
-
-   
-
 }
 
 
-
-
-/* -------- Light Mode (opcional) -------- */
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#F7F8FC; --panel:#FFFFFF; --elev:#FFFFFF;
-    --border:#E6E8EE; --text:#0F172A; --muted:#55607A;
-    --chip:#F1F3F9; --note:#EEF2FF;
-  }
-}
-
-/* -------- Reset/Base -------- */
 *{box-sizing:border-box;}
 html,body,#root{height:100%;}
 body{
@@ -85,7 +54,7 @@ a{color:inherit; text-decoration:none;}
 a:hover{opacity:.96;}
 :focus-visible{outline:none; box-shadow:var(--focus); border-radius:10px;}
 
-/* -------- App Shell -------- */
+
 .app{min-height:100%; display:flex; flex-direction:column;}
 .page.container{padding: var(--sp-6) var(--sp-4); flex:1; margin: var(--margin)}
 .container{padding:0 var(--sp-4); margin: var(--margin)}
@@ -95,9 +64,7 @@ a:hover{opacity:.96;}
   color:var(--muted); text-align:center;
 }
 
-/* ===============================
-   NAVBAR (ids: #nav, #tabs, #brand)
-   =============================== */
+
 
 #nav{
   position: sticky;
@@ -109,22 +76,22 @@ a:hover{opacity:.96;}
   min-height: var(--nav-height);
 }
 
-/* Largura máx centralizada (igual ao conteúdo) */
+
 #tabs{
   margin: var(--margin);
   padding: 10px var(--nav-pad-x);
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;  /* << marca à ESQUERDA, tabs à DIREITA */
+  justify-content: flex-start;  
   gap: 10px;
   flex-wrap: wrap;
 }
 
-/* Marca: container com logo + texto */
+
 #tabs .brand-link{
   display:inline-flex; align-items:center; text-decoration:none;
-  margin-right: auto;           /* << empurra as opções para a direita */
+  margin-right: auto;           
 }
 #brand{
   display:inline-flex;
@@ -142,11 +109,9 @@ a:hover{opacity:.96;}
   font-weight: 650;
   letter-spacing: .2px;
   line-height: 1;
-  /* cor da marca no texto? descomente a linha abaixo */
-  /* color: var(--brand); */
+
 }
 
-/* (Opcional) Avatar se voltar a usar imagem de perfil */
 #tab-profile{
   width: var(--nav-avatar-size);
   height: var(--nav-avatar-size);
@@ -156,7 +121,6 @@ a:hover{opacity:.96;}
   border: 1px solid var(--border);
 }
 
-/* Links do navbar (usam estilo .tab base + ajustes) */
 #tabs .tab{
   text-align: center;
   padding: 8px 12px;
@@ -170,12 +134,11 @@ a:hover{opacity:.96;}
 
 
  
-/* Mobile: navbar compacta */
 @media (max-width: 760px){
   :root{
     --nav-height: 54px;
-    --nav-logo-size: 24px;     /* mobile */
-    --nav-avatar-size: 26px;   /* mobile */
+    --nav-logo-size: 24px;     
+    --nav-avatar-size: 26px;   
     --margin: 0 0 0;
   }
   .rank-items > li{
@@ -192,7 +155,6 @@ a:hover{opacity:.96;}
   }
 }
 
-/* -------- Headings / Text -------- */
 .h1,.h2,.h3,.title{font-weight:700; letter-spacing:.2px;}
 .h1{font-size:clamp(1.6rem, 1.2rem + 1.5vw, 2.4rem); margin:0 0 var(--sp-3);}
 .h2{font-size:clamp(1.25rem, 1rem + .9vw, 1.6rem); margin:0 0 var(--sp-3);}
@@ -214,7 +176,6 @@ a:hover{opacity:.96;}
 }
 
 
-/* -------- Layout Helpers -------- */
 .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
 .inline{display:inline-flex; gap:8px; align-items:center;}
 .between{display:flex; align-items:center; justify-content:space-between;}
@@ -225,7 +186,6 @@ gap: 1em 0;}
 .mt{margin-top:var(--sp-3);}
 .mb{margin-bottom:var(--sp-3);}
 
-/* -------- Grids -------- */
 .grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:var(--sp-3);}
 .grid-3{display:grid; grid-template-columns:repeat(3,1fr); gap:var(--sp-3);}
 .grid-4{display:grid; grid-template-columns:repeat(4,1fr); gap:var(--sp-3);}
@@ -236,7 +196,6 @@ gap: 1em 0;}
   .grid-3,.grid-4,.grid-2{grid-template-columns:1fr;}
 }
 
-/* -------- Sections / Cards -------- */
 .section{margin-bottom:var(--sp-6);}
 .sub{color:var(--muted); margin-top:6px;}
 .card,.rank,.report,.note,.panel{
@@ -259,7 +218,6 @@ gap: 1em 0;}
 }
 .card > .row.grid-4 > div{ min-width: 0; }
 
-/* -------- Buttons -------- */
 .btn, button{
   appearance:none; border:0; cursor:pointer; user-select:none;
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
@@ -278,7 +236,6 @@ gap: 1em 0;}
 .btn.sm{padding:7px 10px; border-radius:10px; font-weight:600;}
 .btn.lg{padding:12px 16px; border-radius:14px;}
 
-/* -------- Badges / Chips / Tags / Pills -------- */
 .chips{display:flex; flex-wrap:wrap; gap:8px;}
 .chip,.tag,.pill{
   background:var(--chip); color:var(--text); border:1px solid var(--border);
@@ -299,7 +256,6 @@ gap: 1em 0;}
 
 }
 
-/* -------- Resultados / Flags -------- */
 .sample{
   background:rgba(67,56,202,.12);
   border:1px dashed rgba(67,56,202,.45);
@@ -321,10 +277,7 @@ gap: 1em 0;}
 .status.safe{color:#7CE0A3;}
 .status.warning{color:#FFD071;}
 .status.danger{color:#FF9C9C;}
-
-/* -------- Listas: ranking & relatos -------- */
 .rank-items{list-style:none; padding-top: 1rem; margin:0; display:grid; gap:10px;}
-
 .rank-items > li{
   display: flex;
   flex-wrap: wrap;
@@ -333,12 +286,9 @@ gap: 1em 0;}
   align-items: center;
 }
 
-
 .rank-item{
   display:flex; align-items:center; justify-content:space-between; gap:12px;
   padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,.02);
-  
-
 }
 .rank-item .left{display:flex; align-items:center; gap:10px;}
 .rank-item .index{
@@ -353,7 +303,6 @@ gap: 1em 0;}
 .report-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
 .report .desc{color:var(--muted);}
 
-/* -------- Tabs (genéricas) -------- */
 .tab{
   padding:8px 12px; border-radius:10px; color:var(--muted); text-decoration:none;
   border:1px solid transparent; transition:background .15s ease, color .15s ease, border-color .15s ease;
@@ -361,7 +310,6 @@ gap: 1em 0;}
 .tab:hover{background:#0f172a; color:var(--text);}
 .tab.active{background:var(--brand); color:white; border-color:transparent;}
 
-/* -------- Formulários -------- */
 .form{display:grid; gap:var(--sp-3);}
 .form-row{display:grid; gap:8px;}
 .form-inline{display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end;}
@@ -394,8 +342,6 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
 
 .link{ color: lightblue; }
 
-
-/* -------- Tables -------- */
 .table{
   width:100%; border-collapse:separate; border-spacing:0; overflow:hidden;
   background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
@@ -405,7 +351,6 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
 .table tbody tr + tr td{border-top:1px solid var(--border);}
 .table tbody tr:hover{background:rgba(255,255,255,.02);}
 
-/* -------- Alerts / Notes -------- */
 .alert{
   display:flex; align-items:flex-start; gap:12px; padding:12px 14px; border-radius:12px;
   border:1px solid var(--border); background:rgba(255,255,255,.02);
@@ -415,7 +360,6 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
 .alert.warning{border-color:rgba(245,158,11,.35); background:rgba(245,158,11,.12); color:#FFE3B3;}
 .alert.danger{border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.12); color:#FFBDBD;}
 
-/* -------- Utilities -------- */
 .hide{display:none !important;}
 .center{display:grid; place-items:center;}
 .maxw-sm{max-width:520px; margin:0 auto;}
@@ -428,14 +372,12 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
   font-size:.85rem;
 }
 
-/* -------- Loader -------- */
 .loader{
   width:18px; height:18px; border-radius:50%;
   border:2.5px solid rgba(255,255,255,.2); border-top-color:#fff; animation:spin .8s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg);}}
 
-/* -------- Page helpers -------- */
 .home-hero{display:grid; gap:var(--sp-3);}
 .home-grid{display:grid; grid-template-columns:2fr 1fr; gap:var(--sp-3);}
 @media (max-width:960px){ .home-grid{grid-template-columns:1fr;} }
@@ -459,13 +401,11 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
 
 .auth-card{max-width:520px; margin:0 auto;}
 
-/* -------- CTA ribbon -------- */
 .ribbon{
   display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border-radius:999px;
   background:rgba(67,56,202,.18); color:#C7C9FF; border:1px solid rgba(67,56,202,.35); font-weight:700; font-size:.9rem;
 }
 
-/* -------- Toast -------- */
 .toast{
   position:fixed; right:16px; bottom:16px; z-index:50; display:grid; gap:8px; width:min(92vw, 380px);
 }
@@ -475,7 +415,6 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
 .toast .item.success{border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.12);}
 .toast .item.error{border-color:rgba(239,68,68,.35); background:rgba(239,68,68,.12);}
 
-/* -------- Motion prefers -------- */
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
 }
