@@ -3,6 +3,7 @@
    Marca primária: #4338CA
    =========================== */
 
+
 /* -------- Design Tokens -------- */
 :root{
   /* Cores base (modo escuro por padrão) */
@@ -54,11 +55,17 @@
   --nav-logo-size: 28px;   /* desktop */
   --nav-avatar-size: 30px; /* desktop (mantido caso volte avatar) */
 
-  --margin: auto 30em auto
+  --margin: auto 25vw auto
+
+   
+
 }
 
+
+
+
 /* -------- Light Mode (opcional) -------- */
-@media (prefers-color-scheme: light){
+@media (prefers-color-scheme: dark){
   :root{
     --bg:#F7F8FC; --panel:#FFFFFF; --elev:#FFFFFF;
     --border:#E6E8EE; --text:#0F172A; --muted:#55607A;
@@ -104,7 +111,7 @@ a:hover{opacity:.96;}
 
 /* Largura máx centralizada (igual ao conteúdo) */
 #tabs{
-  margin: auto 30em auto;
+  margin: var(--margin);
   padding: 10px var(--nav-pad-x);
 
   display: flex;
@@ -161,13 +168,23 @@ a:hover{opacity:.96;}
 #tabs .tab:hover{background:#0f172a; color:var(--text);}
 #tabs .tab.active{background:var(--brand); color:#fff;}
 
+
+ 
 /* Mobile: navbar compacta */
 @media (max-width: 760px){
   :root{
     --nav-height: 54px;
     --nav-logo-size: 24px;     /* mobile */
     --nav-avatar-size: 26px;   /* mobile */
+    --margin: 0 0 0;
   }
+  .rank-items > li{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1rem;
+  overflow:scroll;
+  gap: 1rem;
+}
   #tabs{
     gap: 8px;
     padding-top: 8px;
@@ -190,7 +207,9 @@ a:hover{opacity:.96;}
 .inline{display:inline-flex; gap:8px; align-items:center;}
 .between{display:flex; align-items:center; justify-content:space-between;}
 .end{display:flex; justify-content:flex-end; gap:10px;}
-.block{display:block;}
+.block{display: flex;
+flex-direction: column;
+gap: 1em 0;}
 .mt{margin-top:var(--sp-3);}
 .mb{margin-bottom:var(--sp-3);}
 
@@ -212,12 +231,19 @@ a:hover{opacity:.96;}
   background:var(--panel); border:1px solid var(--border);
   border-radius:var(--radius); box-shadow:var(--shadow-1);
 }
-.card,.rank,.panel{padding:var(--sp-4);}
+.card,.rank,.panel{padding:var(--sp-4);
+  gap: 1em;
+}
 .note{padding:var(--sp-3); background:var(--note);}
 .card.elev{background:var(--elev); box-shadow:var(--shadow-2);}
 .card > .row.grid-4{
   grid-template-columns: 1fr !important;
   gap: var(--sp-3);
+}
+.card > .row.grid-3{
+  grid-template-columns: 1fr !important;
+  gap: var(--sp-3);
+  margin-bottom: 1rem;
 }
 .card > .row.grid-4 > div{ min-width: 0; }
 
@@ -255,12 +281,20 @@ a:hover{opacity:.96;}
 .pill.warn .dot{background:var(--warning);}
 .pill.danger .dot{background:var(--danger);}
 
+.reports{
+  padding: 0 ;
+  list-style: none;
+
+}
+
 /* -------- Resultados / Flags -------- */
 .sample{
   background:rgba(67,56,202,.12);
   border:1px dashed rgba(67,56,202,.45);
   padding:var(--sp-3); border-radius:var(--radius);
+  
 }
+
 .sample-head{display:flex; align-items:center; gap:10px;}
 .flags{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;}
 .flag{
@@ -277,10 +311,22 @@ a:hover{opacity:.96;}
 .status.danger{color:#FF9C9C;}
 
 /* -------- Listas: ranking & relatos -------- */
-.rank-items{list-style:none; padding:0; margin:0; display:grid; gap:10px;}
+.rank-items{list-style:none; padding-top: 1rem; margin:0; display:grid; gap:10px;}
+
+.rank-items > li{
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 1rem;
+  gap: 1rem;
+  align-items: center;
+}
+
+
 .rank-item{
   display:flex; align-items:center; justify-content:space-between; gap:12px;
   padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,.02);
+  
+
 }
 .rank-item .left{display:flex; align-items:center; gap:10px;}
 .rank-item .index{
@@ -288,7 +334,10 @@ a:hover{opacity:.96;}
   background:rgba(67,56,202,.18); color:#C7C9FF; font-weight:800;
 }
 .rank-item .meta{color:var(--muted); font-size:.9rem;}
-.report{padding:var(--sp-3);}
+.report{
+  padding: 1rem;
+  margin-top: 1rem;
+ }
 .report-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
 .report .desc{color:var(--muted);}
 
@@ -414,4 +463,16 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
 /* -------- Motion prefers -------- */
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+}
+
+.card{
+  display:grid;
+  gap: 1em 1em;
+
+}
+
+.row.grid-2 > label{
+  display: flex;
+  flex-direction: column;
+  gap: 1em 0em;
 }
