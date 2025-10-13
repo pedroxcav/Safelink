@@ -392,6 +392,9 @@ input:focus, select:focus, textarea:focus{box-shadow:var(--focus); border-color:
 }
 input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
 
+.link{ color: lightblue; }
+
+
 /* -------- Tables -------- */
 .table{
   width:100%; border-collapse:separate; border-spacing:0; overflow:hidden;
