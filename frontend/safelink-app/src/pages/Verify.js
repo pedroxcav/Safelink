@@ -14,7 +14,7 @@ export default function Verify() {
       <Card>
         <FormRow cols={2}>
           <Input type="url" placeholder="https://exemplo.com/presente" aria-label="URL para validar" />
-          <Button disabled>Validar</Button>
+          <Button >Validar</Button>
         </FormRow>
 
         <div className="hint">Dica: prefira domínios oficiais e evite informar dados sensíveis.</div>

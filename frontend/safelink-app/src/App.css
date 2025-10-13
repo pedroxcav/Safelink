@@ -200,7 +200,19 @@ a:hover{opacity:.96;}
 .small{font-size:.9rem;}
 .muted{color:var(--muted);}
 .label{font-weight:600;}
-.hint{color:var(--muted); font-size:.9rem;}
+
+.hint{color:var(--muted); font-size:.9rem; justify-self: start; align-self: center;}
+
+.alignedItemsDiv{
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+
+}
+
 
 /* -------- Layout Helpers -------- */
 .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
@@ -373,7 +385,7 @@ input:focus, select:focus, textarea:focus{box-shadow:var(--focus); border-color:
 .help{color:var(--muted); font-size:.9rem;}
 .error{color:#ff9c9c; font-weight:700; font-size:.95rem;}
 .form .actions{display:flex; gap:10px; justify-content:flex-end;}
-.checks{display:grid; gap:8px;}
+.checks{display:flex; gap:8px; flex-direction: row; flex-wrap: wrap;}
 .check{
   display:flex; gap:10px; align-items:center; padding:8px 10px; border-radius:10px;
   background:rgba(255,255,255,.02); border:1px solid var(--border);

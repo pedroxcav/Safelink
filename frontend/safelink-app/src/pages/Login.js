@@ -21,8 +21,11 @@ export default function Login() {
             <Link to="#" className="muted small">Esqueci minha senha</Link>
           </div>
 
-          <div className="row end"><Button type="submit">Entrar</Button></div>
-          <div className="hint mt">Novo por aqui? <Link to="/register-user">Crie sua conta</Link></div>
+          <div className='alignedItemsDiv'>
+            <div className="hint mt" >Novo por aqui? <Link to="/register-user">Crie sua conta</Link></div>
+            <Button type="submit">Entrar</Button>
+            </div>
+          
         </Card>
       </Section>
 
@@ -38,8 +41,13 @@ export default function Login() {
             <Link to="#" className="muted small">Esqueci minha senha</Link>
           </div>
 
-          <div className="row end"><Button type="submit">Entrar</Button></div>
-          <div className="hint mt">Quer se tornar parceiro? <Link to="/register-company">Crie sua conta</Link></div>
+          <div className="alignedItemsDiv">
+            <div className="hint mt">Quer se tornar parceiro? 
+              <Link to="/register-company">Crie sua conta</Link>
+            </div>
+            <Button type="submit">Entrar</Button>
+          </div>
+          
         </Card>
       </Section>
     </>
