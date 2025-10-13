@@ -1,22 +1,53 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+// src/components/Navbar.jsx
+import { NavLink } from "react-router-dom";
 import logo from "../media/logo.png";
-import profile from "../media/profile.png";
 
-const Navbar = () => {
-    return (
-        <header id="nav">
-            <div id="nav-inner">
-                <label><img id='brand' src={logo} alt='logo'/></label>
-                <nav id="tabs">
-                    <NavLink className='tab' to="/">Home</NavLink>
-                    <NavLink className='tab' to="/verify">Verificar</NavLink>
-                    <NavLink className='tab' to="/report">Relatar</NavLink>
-                    <NavLink className='tab' to="/login"><img id='tab-profile' src={profile} alt='profile'/></NavLink>
-                </nav>
-            </div>
-        </header>
-    );
+export default function Navbar() {
+  return (
+    <header id="nav" role="banner" aria-label="Barra de navegação">
+      <div id="tabs">
+        {/* Marca */}
+        <NavLink to="/" aria-label="SafeLink - Início" className="brand-link">
+          <div id="brand">
+            <img src={logo} alt="Logo SafeLink" />
+          </div>
+          <span id="brand-name">Safelink</span>
+        </NavLink>
+
+        {/* Opções */}
+        <NavLink
+          to="/"
+          className={({ isActive }) => "tab" + (isActive ? " active" : "")}
+          aria-label="Página inicial"
+        >
+          Início
+        </NavLink>
+
+        <NavLink
+          to="/verify"
+          className={({ isActive }) => "tab" + (isActive ? " active" : "")}
+          aria-label="Validação de link"
+        >
+          Verificar
+        </NavLink>
+
+        <NavLink
+          to="/report"
+          className={({ isActive }) => "tab" + (isActive ? " active" : "")}
+          aria-label="Relatar golpe"
+        >
+          Relatar
+        </NavLink>
+
+        {/* Login / Perfil (sem avatar) */}
+        <NavLink
+          to="/login"
+          className={({ isActive }) => "tab" + (isActive ? " active" : "")}
+          aria-label="Entrar"
+        >
+          Perfil
+        </NavLink>
+      </div>
+    </header>
+  );
 }
-
-export default Navbar;
