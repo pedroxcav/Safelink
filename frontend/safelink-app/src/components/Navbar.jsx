@@ -13,19 +13,11 @@ export default function Navbar() {
         </NavLink>
 
         <NavLink
-          to="/"
+          to="/menu"
           className={({ isActive }) => "tab" + (isActive ? " active" : "")}
           aria-label="Página inicial"
         >
           Início
-        </NavLink>
-
-        <NavLink
-          to="/verify"
-          className={({ isActive }) => "tab" + (isActive ? " active" : "")}
-          aria-label="Validação de link"
-        >
-          Verificar
         </NavLink>
 
         <NavLink

@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App'
 
+import Menu from './pages/Menu';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Guide from './pages/Guide';
 import Report from './pages/Report';
-import Verify from './pages/Verify';
 import SignUpUser from './pages/SignUpUser';
 import SignUpCompany from './pages/SignUpCompany';
 
@@ -22,11 +22,11 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home/>
       },{
+        path: 'menu',
+        element: <Menu/>
+      },{
         path: 'report',
         element: <Report/>
-      },{
-        path: 'verify',
-        element: <Verify/>
       },{
         path: 'report/guide',
         element: <Guide/>

@@ -42,18 +42,16 @@
   --margin: auto 25vw auto
 }
 
-
 *{box-sizing:border-box;}
 html,body,#root{height:100%;}
 body{
   margin:0; background:var(--bg); color:var(--text);
-  font-family:var(--font-sans); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-y: scroll;
+  font-family:var(--font-sans); -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; overflow-y: scroll; overflow-x: hidden;
 }
 img{max-width:100%; display:block;}
 a{color:inherit; text-decoration:none;}
 a:hover{opacity:.96;}
 :focus-visible{outline:none; box-shadow:var(--focus); border-radius:10px;}
-
 
 .app{min-height:100%; display:flex; flex-direction:column;}
 .page.container{padding: var(--sp-6) var(--sp-4); flex:1; margin: var(--margin)}
@@ -63,8 +61,6 @@ a:hover{opacity:.96;}
   padding: var(--sp-4);
   color:var(--muted); text-align:center;
 }
-
-
 
 #nav{
   position: sticky;
@@ -76,7 +72,6 @@ a:hover{opacity:.96;}
   min-height: var(--nav-height);
 }
 
-
 #tabs{
   margin: var(--margin);
   padding: 10px var(--nav-pad-x);
@@ -87,7 +82,6 @@ a:hover{opacity:.96;}
   gap: 10px;
   flex-wrap: wrap;
 }
-
 
 #tabs .brand-link{
   display:inline-flex; align-items:center; text-decoration:none;
@@ -131,8 +125,6 @@ a:hover{opacity:.96;}
 }
 #tabs .tab:hover{background:#0f172a; color:var(--text);}
 #tabs .tab.active{background:var(--brand); color:#fff;}
-
-
  
 @media (max-width: 760px){
   :root{
@@ -174,7 +166,6 @@ a:hover{opacity:.96;}
   justify-content: space-between;
 
 }
-
 
 .row{display:flex; gap:12px; align-items:center; flex-wrap:wrap;}
 .inline{display:inline-flex; gap:8px; align-items:center;}
@@ -260,7 +251,6 @@ gap: 1em 0;}
   background:rgba(67,56,202,.12);
   border:1px dashed rgba(67,56,202,.45);
   padding:var(--sp-3); border-radius:var(--radius);
-  
 }
 
 .sample-head{display:flex; align-items:center; gap:10px;}
@@ -429,4 +419,107 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
   display: flex;
   flex-direction: column;
   gap: 1em 0em;
+}
+
+.cover {
+  display: flex;
+  align-items: center;
+}
+
+/* ALTERAÇÕES - PEDRO CAVALCANTI - HOME */
+
+.hero--bleed{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+
+  --hero-side: clamp(16px, 5vw, 48px);
+  padding-left: var(--hero-side);
+  padding-right: var(--hero-side);
+}
+
+.hero-card{
+  position: relative;
+  min-height: clamp(68vh, 72vh, 86vh);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.hero-media{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 0;
+}
+
+.hero-card::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 8, 12, .72) 0%,
+    rgba(6, 8, 12, .38) 40%,
+    rgba(6, 8, 12, 0)   70%
+  );
+}
+
+.hero-content{
+  position: static !important;
+  --hero-pad: clamp(20px, 5vw, 48px);
+  padding: var(--hero-pad);
+}
+
+.hero-title{
+  position: absolute;
+  top: var(--hero-pad);
+  left: var(--hero-pad);
+  right: var(--hero-pad);
+  margin: 0;
+  z-index: 2;
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
+
+  font-size: clamp(3.5rem, 1.2rem + 3.2vw, 4rem);
+  line-height: 1.05;
+  letter-spacing: .2px;
+  font-weight: 700;
+  max-width: clamp(22ch, 40vw, 28ch);
+  text-wrap: balance;
+}
+
+.hero-bottom{
+  position: absolute;
+  left: var(--hero-pad);
+  right: var(--hero-pad);
+  bottom: var(--hero-pad);
+  z-index: 2;
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.hero-sub{
+  margin: 0;
+  font-size: clamp(1.06rem, 0.9rem + 1.1vw, 1.35rem);
+  line-height: 1.45;
+  max-width: clamp(38ch, 56vw, 60ch);
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: balance;
+}
+
+.hero-actions{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 760px){
+  .hero-title{ max-width: 26ch; }
+  .hero-sub{ max-width: 52ch; }
 }
