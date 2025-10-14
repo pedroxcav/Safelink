@@ -5,6 +5,7 @@ import FormField from '../components/Form/FormField';
 import Select from '../components/Form/Select';
 import Textarea from '../components/Form/Textarea';
 import { Link } from 'react-router-dom';
+import Button from '../components/UI/Button';
 
 export default function Report() {
   return (
@@ -47,8 +48,8 @@ export default function Report() {
           <Textarea rows="4" placeholder="Ex.: prometeram brinde e pediram taxa de R$ 19,90" />
         </FormField>
 
-        <div className="row end">
-          <Link to="/report/guide" className="btn">Relatar</Link>
+        <div className="row">
+          <Button style={{ width: "100%"}}>Relatar</Button>
         </div>
       </Card>
     </Section>

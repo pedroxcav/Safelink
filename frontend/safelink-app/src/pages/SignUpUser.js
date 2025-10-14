@@ -12,25 +12,25 @@ export default function SignUpUser() {
       <Card as="form" onSubmit={(e) => e.preventDefault()}>
         <FormRow cols={2}>
           <FormField label="Nome completo"><Input type="text" placeholder="Seu nome" /></FormField>
-          <FormField label="Telefone (opcional)"><Input type="text" placeholder="(11) 3333-4444" /></FormField>
+          <FormField label="Telefone (opcional)"><Input type="tel" placeholder="(11) 3333-4444" /></FormField>
         </FormRow>
 
         <FormRow cols={2}>
           <FormField label="E-mail"><Input type="text" placeholder="usuário@email.com" /></FormField>
-          <div className="row">
+          
             <FormField label="Senha"><Input type="password" placeholder="Crie uma senha" /></FormField>
             <FormField label="Confirmar senha"><Input type="password" placeholder="Repita a senha" /></FormField>
-          </div>
+          
         </FormRow>
 
-        <div className="row">
+        <div className="terms">
           <label className="inline">
-            <input type="checkbox" /> Aceito os <Link to="/terms" target="_blank" rel="noreferrer">Termos</Link> e {" "}
-            <Link to="/privacy" target="_blank" rel="noreferrer">Privacidade.</Link>
+            <input type="checkbox" /> Aceito os <Link to="/terms" target="_blank" rel="noreferrer">Termos de Privacidade.</Link>
           </label>
+          <div><Button type="submit">Criar conta</Button></div>
         </div>
 
-        <div className="row end"><Button type="submit">Criar conta</Button></div>
+        
         <div className="hint mt">Já possui conta?<Link className="link" to="/login"> Entrar</Link></div>
       </Card>
     </Section>

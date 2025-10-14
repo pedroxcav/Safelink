@@ -25,14 +25,13 @@ export default function SignUpCompany() {
           <FormField label="Telefone comercial"><Input type="text" placeholder="(11) 3333-4444" /></FormField>
         </FormRow>
 
-        <div className="row">
+        <div className="terms">
           <label className="inline">
-            <input type="checkbox" /> Aceito os <Link to="#" target="_blank" rel="noreferrer">Termos</Link> e {" "}
-            <Link to="#" target="_blank" rel="noreferrer">Privacidade.</Link>
+            <input type="checkbox" /> Aceito os <Link to="#" target="_blank" rel="noreferrer">Termos de Privacidade.</Link>
           </label>
+          <div className="row end"><Button type="submit">Criar conta</Button></div>
         </div>
 
-        <div className="row end"><Button type="submit">Criar conta</Button></div>
         <div className="hint mt">Já possui conta? <Link className="link" to="/login"> Entrar</Link></div>
       </Card>
     </Section>

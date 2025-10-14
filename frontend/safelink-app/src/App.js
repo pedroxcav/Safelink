@@ -12,7 +12,7 @@ function App() {
         <Outlet />
       </main>
       <footer className="footer">
-        © 2025 SafeLink – USJT • Prevenção, reputação e assistência pós-golpe
+        © 2025 SafeLink – Prevenção e Pós-golpe
       </footer>
     </div>
   );
