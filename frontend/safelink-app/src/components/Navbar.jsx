@@ -6,7 +6,7 @@ export default function Navbar() {
       <div id="tabs">
         <NavLink to="/" aria-label="SafeLink - Início" className="brand-link">
           <div id="brand">
-            <img src="https://i.ibb.co/VY4cpX6J/logo.png" alt="Logo SafeLink" />
+            <img src="https://i.ibb.co/VcB4BQHh/logo.png" alt="Logo SafeLink" />
           </div>
           <span id="brand-name">Safelink</span>
         </NavLink>

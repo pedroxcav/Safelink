@@ -2,7 +2,7 @@ function Home() {
     return (
         <section className="hero hero--bleed">
             <div className="hero-card">
-            <img className="hero-media" src="https://i.ibb.co/qLvvnfq4/cover.jpg" alt="SafeLink — segurança contra golpes online" />
+            <img className="hero-media" src="https://i.ibb.co/wrQQnZBy/cover.jpg" alt="SafeLink — segurança contra golpes online" />
             <div className="hero-content">
                 <h1 className="hero-title">Fique seguro em cada clique</h1>
                 <div className="hero-bottom">
