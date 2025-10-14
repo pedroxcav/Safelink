@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import logo from "../media/logo.png";
 
 export default function Navbar() {
   return (
@@ -7,7 +6,7 @@ export default function Navbar() {
       <div id="tabs">
         <NavLink to="/" aria-label="SafeLink - Início" className="brand-link">
           <div id="brand">
-            <img src={logo} alt="Logo SafeLink" />
+            <img src="https://i.ibb.co/VY4cpX6J/logo.png" alt="Logo SafeLink" />
           </div>
           <span id="brand-name">Safelink</span>
         </NavLink>

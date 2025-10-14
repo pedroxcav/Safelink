@@ -179,8 +179,6 @@ a:hover{opacity:.96;}
   align-content: center;
 }
 
-
-
 .between{display:flex; align-items:center; justify-content:space-between;}
 .end{display:flex; justify-content:flex-end; gap:10px;}
 .block{display: flex;
@@ -451,8 +449,6 @@ input[type="checkbox"], input[type="radio"]{accent-color:var(--brand);}
   display: flex;
   align-items: center;
 }
-
-/* ALTERAÇÕES - PEDRO CAVALCANTI - HOME */
 
 .hero--bleed{
   width: 100vw;

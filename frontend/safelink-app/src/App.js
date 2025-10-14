@@ -1,6 +1,5 @@
 import './App.css';
 
-// 2 - Reaproveitamento de Estrutura
 import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar.jsx';
 

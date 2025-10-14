@@ -15,7 +15,7 @@ export default function Home() {
       <Section title="Reputação Comunitária" subtitle="Pesquise por domínio, telefone, chave PIX ou @perfil.">
         <Card>
           <FormRow cols={3}>
-            <Select defaultValue="Domínio" aria-label="Tipo de item">
+            <Select defaultValue="Link" aria-label="Tipo de item">
               <option>Link</option>
               <option>Telefone</option>
               <option>Chave PIX</option>
