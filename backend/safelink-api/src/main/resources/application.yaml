@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: safelink
+  sql:
+    init:
+      mode: always
+  jpa:
+    show-sql: true
+  datasource:
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    url: ${DATABASE_URL}

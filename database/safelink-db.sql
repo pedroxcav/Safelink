@@ -1,4 +1,3 @@
-
 CREATE TYPE TIPOGOLPE AS ENUM ('Golpe do Presente', 'Phishing / Roubo de credenciais', 'Taxa de entrega / Frete falso', 'Transferência PIX', 'Outro');
 CREATE TYPE TIPOCANAL AS ENUM ('Whatsapp', 'SMS', 'Instagram', 'Web');
 CREATE TYPE TIPODADO AS ENUM ('CPF', 'Senha', 'Dados do cartão', 'Transferência do PIX', 'E-mail', 'Outros');
