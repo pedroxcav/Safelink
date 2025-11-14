@@ -1,0 +1,14 @@
+package com.safelink.api.model.dto.cliente;
+
+import com.safelink.api.model.dto.telefone.TelefoneRequestDTO;
+
+import java.util.UUID;
+
+public record ClienteResponseDTO(
+        UUID id,
+        String nome,
+        String cpf,
+        String email,
+        String senha,
+        TelefoneRequestDTO telefone
+) {}
