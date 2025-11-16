@@ -1,5 +1,6 @@
 package com.safelink.api.model.dto;
 
 public record LoginResponseDTO(
-        String token
+        String token,
+        Long expiresIn
 ) {}

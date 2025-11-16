@@ -5,46 +5,28 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CNPJ;
 
+import com.safelink.api.model.enums.*;
+
 import java.util.Set;
 import java.util.UUID;
 
 @Entity
+@Getter @Setter
 @Table(name = "empresa_table")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class Empresa {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+@PrimaryKeyJoinColumn(name = "usuario_id")
+@NoArgsConstructor @AllArgsConstructor
+public class Empresa extends Usuario {
 
     @Column(nullable = false)
     private String razao;
 
-    @Column(nullable = false)
-    private String nomeFantasia;
-
     @CNPJ
-    @Column(nullable = false, unique = true, length = 14)
+    @Column(nullable = false, unique = true, length = 18)
     private String cnpj;
-
-    @Email
-    @Column(nullable = false)
-    private String email;
 
     @Column(nullable = false)
     private String siteOficial;
 
-    @Column(nullable = false)
-    private String senha;
-
-    @OneToOne
-    @JoinColumn(name = "telefone_id", nullable = false)
-    private Telefone telefone;
-
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.REMOVE)
     private Set<Link> links;
 }
-

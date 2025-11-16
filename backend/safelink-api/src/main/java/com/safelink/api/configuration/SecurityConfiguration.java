@@ -43,13 +43,15 @@ public class SecurityConfiguration {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET,
+                                "/empresa").hasAuthority("SCOPE_EMPRESA")
+                        .requestMatchers(HttpMethod.PUT,
+                                "/empresa").hasAuthority("SCOPE_EMPRESA")
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/empresa").hasAuthority("SCOPE_EMPRESA")
                         .requestMatchers(HttpMethod.POST,
-                                "/employees",
-                                "/projects").hasAuthority("SCOPE_COMPANY")
-                        .requestMatchers(HttpMethod.POST,
-                                "/companies",
-                                "/companies/login",
-                                "/employees/login").permitAll()
+                                "/empresa",
+                                "/empresa/login").permitAll()
                         .anyRequest().authenticated())
                 .build();
     }

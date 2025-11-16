@@ -24,8 +24,10 @@ public class Telefone {
     private String numero;
 
     @OneToOne(mappedBy = "telefone")
-    private Empresa empresa;
+    private Usuario usuario;
 
-    @OneToOne(mappedBy = "telefone")
-    private Cliente cliente;
+    public Telefone(String ddd, String numero) {
+        this.ddd = ddd;
+        this.numero = numero;
+    }
 }

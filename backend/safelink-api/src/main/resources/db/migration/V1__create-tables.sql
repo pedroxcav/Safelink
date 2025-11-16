@@ -3,57 +3,73 @@ CREATE TYPE TIPOCANAL AS ENUM ('Whatsapp', 'SMS', 'Instagram', 'Web');
 CREATE TYPE TIPODADO AS ENUM ('CPF', 'Senha', 'Dados do cartão', 'Transferência do PIX', 'E-mail', 'Outros');
 
 CREATE TABLE TELEFONE_TABLE(
-  id uuid primary key,
-  ddd char(3) not null,
-  numero char(9) not null,
-  constraint NUMERO_DDD UNIQUE (ddd, numero)
+  id uuid PRIMARY KEY,
+  ddd char(3) NOT NULL,
+  numero char(9) NOT NULL,
+  CONSTRAINT NUMERO_DDD UNIQUE (ddd, numero)
 );
 
-CREATE TABLE DADO_ENVOLVIDO_TABLE(
-  id uuid primary key,
-  tipo_dado TIPODADO not null,
-  informacao varchar not null
+CREATE TABLE USUARIO_TABLE (
+  id uuid PRIMARY KEY,
+  nome varchar NOT NULL,
+  email varchar NOT NULL UNIQUE,
+  senha varchar NOT NULL,
+  telefone_id uuid NOT NULL,
+  role smallint NOT NULL,
+
+  CONSTRAINT fk_telefone_usuario
+    FOREIGN KEY (telefone_id) REFERENCES TELEFONE_TABLE(id)
 );
 
 CREATE TABLE EMPRESA_TABLE (
-  id uuid PRIMARY KEY,
+  usuario_id uuid PRIMARY KEY,
   razao varchar NOT NULL,
-  nome_fantasia varchar NOT NULL,
-  cnpj char(14) not null unique,
-  email_corporativo varchar not null,
-  site_oficial varchar not null,
-  senha varchar not null,
-  telefone_id uuid not null,
-  constraint fk_telefone_empresa foreign key (telefone_id) references TELEFONE_TABLE(id)
+  cnpj char(18) NOT NULL UNIQUE,
+  site_oficial varchar NOT NULL,
+
+  CONSTRAINT fk_empresa_usuario
+    FOREIGN KEY (usuario_id) REFERENCES USUARIO_TABLE(id)
+      ON DELETE CASCADE
 );
 
-CREATE TABLE LINKS_TABLE (
-  id uuid primary key,
-  link_real varchar not null,
-  link_encurtado varchar not null,
-  empresa_id uuid not null,
-  constraint fk_empresa_id foreign key (empresa_id) references EMPRESA_TABLE(id)
+CREATE TABLE CLIENTE_TABLE (
+  usuario_id uuid PRIMARY KEY,
+  cpf char(11) NOT NULL UNIQUE,
+
+  CONSTRAINT fk_cliente_usuario
+    FOREIGN KEY (usuario_id) REFERENCES USUARIO_TABLE(id)
+      ON DELETE CASCADE
 );
 
-CREATE TABLE CLIENTE_TABLE(
-  id uuid primary key,
-  nome varchar not null,
-  cpf char(11) unique not null,
-  email varchar not null,
-  senha varchar not null,
-  telefone_id uuid not null,
-  constraint fk_telefone_cliente foreign key (telefone_id) references TELEFONE_TABLE(id)
+CREATE TABLE LINK_TABLE (
+  id uuid PRIMARY KEY,
+  link_real varchar NOT NULL,
+  link_encurtado varchar NOT NULL,
+  empresa_id uuid NOT NULL,
 
+  CONSTRAINT fk_link_empresa
+    FOREIGN KEY (empresa_id) REFERENCES EMPRESA_TABLE(usuario_id)
+      ON DELETE CASCADE
+);
+
+CREATE TABLE DADO_ENVOLVIDO_TABLE(
+  id uuid PRIMARY KEY,
+  tipo_dado TIPODADO NOT NULL,
+  informacao varchar NOT NULL
 );
 
 CREATE TABLE RELATO_TABLE(
-  id uuid primary key,
-  tipo_golpe TIPOGOLPE not null,
-  canal TIPOCANAL not null,
+  id uuid PRIMARY KEY,
+  tipo_golpe TIPOGOLPE NOT NULL,
+  canal TIPOCANAL NOT NULL,
   descricao varchar,
-  data date not null,
-  dado_id uuid not null,
-  cliente_id uuid not null,
-  constraint fk_dado_envolvido foreign key (dado_id) references DADO_ENVOLVIDO_TABLE(id),
-  constraint fk_cliente_relato foreign key (cliente_id) references CLIENTE_TABLE(id)
+  data date NOT NULL,
+  dado_id uuid NOT NULL,
+  cliente_id uuid NOT NULL,
+
+  CONSTRAINT fk_relato_dado
+    FOREIGN KEY (dado_id) REFERENCES DADO_ENVOLVIDO_TABLE(id),
+
+  CONSTRAINT fk_relato_cliente
+    FOREIGN KEY (cliente_id) REFERENCES CLIENTE_TABLE(usuario_id)
 );
