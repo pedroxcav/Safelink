@@ -8,5 +8,6 @@ import java.util.UUID;
 
 @Repository
 public interface TelefoneRepository extends JpaRepository<Telefone, UUID> {
+    boolean existsByDddAndNumero(String ddd, String numero);
 }
 

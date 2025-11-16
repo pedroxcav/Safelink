@@ -17,15 +17,15 @@ import java.util.UUID;
 @NoArgsConstructor @AllArgsConstructor
 public class Empresa extends Usuario {
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String razao;
 
     @CNPJ
     @Column(nullable = false, unique = true, length = 18)
     private String cnpj;
 
-    @Column(nullable = false)
-    private String siteOficial;
+    @Column(nullable = false,  unique = true)
+    private String site;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.REMOVE)
     private Set<Link> links;

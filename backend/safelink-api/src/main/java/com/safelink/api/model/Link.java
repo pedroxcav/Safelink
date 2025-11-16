@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "links_table")
+@Table(name = "link_table")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

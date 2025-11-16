@@ -23,9 +23,9 @@ CREATE TABLE USUARIO_TABLE (
 
 CREATE TABLE EMPRESA_TABLE (
   usuario_id uuid PRIMARY KEY,
-  razao varchar NOT NULL,
+  razao varchar NOT NULL UNIQUE,
   cnpj char(18) NOT NULL UNIQUE,
-  site_oficial varchar NOT NULL,
+  site varchar NOT NULL UNIQUE,
 
   CONSTRAINT fk_empresa_usuario
     FOREIGN KEY (usuario_id) REFERENCES USUARIO_TABLE(id)

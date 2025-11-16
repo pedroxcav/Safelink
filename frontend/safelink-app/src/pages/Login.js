@@ -32,7 +32,7 @@ export default function Login() {
       <Section title="Empresas" subtitle="Acesse sua conta para ver seus incidentes, relatos e configurações.">
         <Card as="form" onSubmit={(e) => e.preventDefault()}>
           <FormRow cols={2}>
-            <FormField label="CNPJ"><Input type="text" placeholder="00.000.000/0001-00" /></FormField>
+            <FormField label="E-mail"><Input type="text" placeholder="usuario@email.com" /></FormField>
             <FormField label="Senha"><Input type="password" placeholder="Sua senha" /></FormField>
           </FormRow>
 

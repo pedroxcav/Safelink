@@ -45,34 +45,41 @@ public class EmpresaService {
     }
 
     public void createEmpresa(NewEmpresaDTO data){
-        if (empresaRepository.existsByCnpj(data.cnpj())) {
+        boolean byEmail = empresaRepository.existsByEmail(data.email());
+        boolean byCnpj = empresaRepository.existsByCnpj(data.cnpj());
+        boolean byRazao = empresaRepository.existsByRazao(data.razao());
+        boolean bySite =  empresaRepository.existsBySite(data.site());
+
+        NewTelefoneDTO telefoneData = data.telefone();
+        boolean byTelefone = telefoneRepository.existsByDddAndNumero(telefoneData.ddd(), telefoneData.numero());
+
+        if (byEmail || byCnpj || byRazao || bySite || byTelefone)
             throw new UsedDataException();
-        } else {
-            Empresa empresa = new Empresa();
-            empresa.setCnpj(data.cnpj());
-            empresa.setRazao(data.razao());
-            empresa.setNome(data.nomeFantasia());
-            empresa.setEmail(data.email());
-            empresa.setSiteOficial(data.siteOficial());
-            empresa.setSenha(encoder.encode(data.senha()));
-            empresa.setRole(Role.EMPRESA);
 
-            NewTelefoneDTO telefoneData = data.telefone();
-            Telefone telefone = new Telefone(telefoneData.ddd(), telefoneData.numero());
-            empresa.setTelefone(telefone);
+        Empresa empresa = new Empresa();
+        empresa.setCnpj(data.cnpj());
+        empresa.setRazao(data.razao());
+        empresa.setNome(data.nome());
+        empresa.setEmail(data.email());
+        empresa.setSite(data.site());
+        empresa.setSenha(encoder.encode(data.senha()));
+        empresa.setRole(Role.EMPRESA);
 
-            telefoneRepository.save(telefone);
-            empresaRepository.save(empresa);
-        }
+        Telefone telefone = new Telefone(telefoneData.ddd(), telefoneData.numero());
+        empresa.setTelefone(telefone);
+
+        empresaRepository.save(empresa);
     }
 
     public void updateEmpresa(UpdateEmpresaDTO data, JwtAuthenticationToken token){
         Empresa empresa = this.getEmpresa(token.getName());
 
-        empresa.setRazao(data.razao());
-        empresa.setNome(data.nomeFantasia());
+        if(empresaRepository.existsByEmail(data.email()))
+            throw new UsedDataException("Email already exists");
+
+        empresa.setNome(data.nome());
         empresa.setEmail(data.email());
-        empresa.setSiteOficial(data.siteOficial());
+        empresa.setSite(data.site());
         empresa.setSenha(encoder.encode(data.senha()));
 
         empresaRepository.save(empresa);

@@ -29,7 +29,7 @@ public abstract class Usuario {
     @Column(nullable = false)
     private String senha;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "telefone_id", nullable = false)
     private Telefone telefone;
 

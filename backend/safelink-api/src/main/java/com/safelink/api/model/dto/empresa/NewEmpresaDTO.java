@@ -7,10 +7,10 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 public record NewEmpresaDTO(
         @NotBlank String razao,
-        @NotBlank String nomeFantasia,
+        @NotBlank String nome,
         @CNPJ @NotBlank String cnpj,
         @Email @NotBlank String email,
-        @NotBlank String siteOficial,
+        @NotBlank String site,
         @NotBlank String senha,
         NewTelefoneDTO telefone
 ) {}
