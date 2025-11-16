@@ -1,7 +1,6 @@
 package com.safelink.api.repository;
 
 import com.safelink.api.model.Empresa;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
