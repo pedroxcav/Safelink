@@ -8,10 +8,10 @@ import java.util.UUID;
 public record EmpresaDTO(
         UUID id,
         String razao,
-        String nomeFantasia,
+        String nome,
         String cnpj,
         String email,
-        String siteOficial,
+        String site,
         TelefoneDTO telefone) {
 
     public static EmpresaDTO toDTO (Empresa e) {

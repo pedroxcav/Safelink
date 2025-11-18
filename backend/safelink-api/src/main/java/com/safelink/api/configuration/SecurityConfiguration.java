@@ -49,8 +49,16 @@ public class SecurityConfiguration {
                                 "/empresa").hasAuthority("SCOPE_EMPRESA")
                         .requestMatchers(HttpMethod.DELETE,
                                 "/empresa").hasAuthority("SCOPE_EMPRESA")
+                        .requestMatchers(HttpMethod.GET,
+                                "/cliente").hasAuthority("SCOPE_CLIENTE")
+                        .requestMatchers(HttpMethod.PUT,
+                                "/cliente").hasAuthority("SCOPE_CLIENTE")
+                        .requestMatchers(HttpMethod.DELETE,
+                                "/cliente").hasAuthority("SCOPE_CLIENTE")
                         .requestMatchers(HttpMethod.POST,
                                 "/empresa",
+                                "/cliente",
+                                "/cliente/login",
                                 "/empresa/login").permitAll()
                         .anyRequest().authenticated())
                 .build();

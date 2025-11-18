@@ -110,7 +110,7 @@ public class EmpresaService {
         var now = Instant.now();
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("office.api")
+                .issuer("safelink.api")
                 .subject(empresa.getId().toString())
                 .expiresAt(now.plusSeconds(expiresIn))
                 .claim("scope", empresa.getRole())
