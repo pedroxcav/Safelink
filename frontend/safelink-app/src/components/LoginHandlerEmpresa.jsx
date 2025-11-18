@@ -1,0 +1,26 @@
+
+
+export async function  handleLoginEmpresa(event, empresaEmail, empresaPassword){
+    event.preventDefault()
+
+    try{
+        const requestData = await fetch('http://localhost:8080/empresa/login',{
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: empresaEmail,
+                password: empresaPassword
+            })
+
+        });
+
+        const data = await requestData.json();
+        console.log("respoutsoa", data)
+    }catch{
+
+    }
+    
+}
+
