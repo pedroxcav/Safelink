@@ -11,14 +11,12 @@ export async function  handleLoginEmpresa(event, empresaEmail, empresaPassword){
             },
             body: JSON.stringify({
                 email: empresaEmail,
-                password: empresaPassword
+                senha: empresaPassword
             })
-
         });
-
         const data = await requestData.json();
         console.log("respoutsoa", data)
-    }catch{
+    } catch {
 
     }
     
