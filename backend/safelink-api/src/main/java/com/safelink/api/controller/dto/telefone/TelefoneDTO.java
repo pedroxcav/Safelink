@@ -1,4 +1,4 @@
-package com.safelink.api.model.dto.telefone;
+package com.safelink.api.controller.dto.telefone;
 
 import com.safelink.api.model.Telefone;
 

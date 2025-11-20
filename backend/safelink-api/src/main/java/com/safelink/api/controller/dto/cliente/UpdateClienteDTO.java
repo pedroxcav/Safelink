@@ -1,4 +1,4 @@
-package com.safelink.api.model.dto.cliente;
+package com.safelink.api.controller.dto.cliente;
 
 import jakarta.validation.constraints.NotBlank;
 

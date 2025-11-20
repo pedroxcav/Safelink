@@ -1,8 +1,8 @@
-package com.safelink.api.model.dto.telefone;
+package com.safelink.api.controller.dto.telefone;
 
 import jakarta.validation.constraints.NotNull;
 
-public record UpdateTelefoneDTO(
+public record NewTelefoneDTO(
         @NotNull String ddd,
         @NotNull String numero
 ) {}

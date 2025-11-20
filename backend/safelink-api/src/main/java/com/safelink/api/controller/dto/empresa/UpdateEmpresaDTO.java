@@ -1,4 +1,4 @@
-package com.safelink.api.model.dto.empresa;
+package com.safelink.api.controller.dto.empresa;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Email;

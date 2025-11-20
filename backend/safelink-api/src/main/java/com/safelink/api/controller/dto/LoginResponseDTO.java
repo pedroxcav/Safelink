@@ -1,4 +1,4 @@
-package com.safelink.api.model.dto;
+package com.safelink.api.controller.dto;
 
 public record LoginResponseDTO(
         String token,

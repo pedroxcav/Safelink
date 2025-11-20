@@ -1,6 +1,6 @@
-package com.safelink.api.model.dto.cliente;
+package com.safelink.api.controller.dto.cliente;
 
-import com.safelink.api.model.dto.telefone.NewTelefoneDTO;
+import com.safelink.api.controller.dto.telefone.NewTelefoneDTO;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
 

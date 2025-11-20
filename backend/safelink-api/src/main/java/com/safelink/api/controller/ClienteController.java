@@ -1,10 +1,10 @@
 package com.safelink.api.controller;
 
-import com.safelink.api.model.dto.LoginRequestDTO;
-import com.safelink.api.model.dto.LoginResponseDTO;
-import com.safelink.api.model.dto.cliente.ClienteDTO;
-import com.safelink.api.model.dto.cliente.NewClienteDTO;
-import com.safelink.api.model.dto.cliente.UpdateClienteDTO;
+import com.safelink.api.controller.dto.LoginRequestDTO;
+import com.safelink.api.controller.dto.LoginResponseDTO;
+import com.safelink.api.controller.dto.cliente.ClienteDTO;
+import com.safelink.api.controller.dto.cliente.NewClienteDTO;
+import com.safelink.api.controller.dto.cliente.UpdateClienteDTO;
 import com.safelink.api.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

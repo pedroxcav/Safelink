@@ -1,14 +1,15 @@
 package com.safelink.api.service;
 
+import com.safelink.api.controller.dto.telefone.NewTelefoneDTO;
 import com.safelink.api.exception.LoginFailedException;
 import com.safelink.api.exception.NotFoundException;
 import com.safelink.api.exception.UsedDataException;
 import com.safelink.api.model.Cliente;
 import com.safelink.api.model.Telefone;
-import com.safelink.api.model.dto.LoginRequestDTO;
-import com.safelink.api.model.dto.cliente.ClienteDTO;
-import com.safelink.api.model.dto.cliente.NewClienteDTO;
-import com.safelink.api.model.dto.cliente.UpdateClienteDTO;
+import com.safelink.api.controller.dto.LoginRequestDTO;
+import com.safelink.api.controller.dto.cliente.ClienteDTO;
+import com.safelink.api.controller.dto.cliente.NewClienteDTO;
+import com.safelink.api.controller.dto.cliente.UpdateClienteDTO;
 import com.safelink.api.model.enums.Role;
 import com.safelink.api.repository.ClienteRepository;
 import com.safelink.api.repository.TelefoneRepository;
@@ -62,7 +63,7 @@ public class ClienteServiceTest {
                 "teste@email.com",
                 "12345678900",
                 "senha",
-                new com.safelink.api.model.dto.telefone.NewTelefoneDTO("11", "999999999")
+                new NewTelefoneDTO("11", "999999999")
         );
 
         when(clienteRepository.existsByEmail(dto.email())).thenReturn(false);
@@ -83,7 +84,7 @@ public class ClienteServiceTest {
                 "email@email.com",
                 "12345678900",
                 "senha",
-                new com.safelink.api.model.dto.telefone.NewTelefoneDTO("11", "999999999")
+                new NewTelefoneDTO("11", "999999999")
         );
 
         when(clienteRepository.existsByEmail(dto.email())).thenReturn(true);

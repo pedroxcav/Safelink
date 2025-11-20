@@ -1,7 +1,7 @@
 package com.safelink.api.controller;
 
-import com.safelink.api.model.dto.telefone.TelefoneDTO;
-import com.safelink.api.model.dto.telefone.UpdateTelefoneDTO;
+import com.safelink.api.controller.dto.telefone.TelefoneDTO;
+import com.safelink.api.controller.dto.telefone.UpdateTelefoneDTO;
 import com.safelink.api.service.TelefoneService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

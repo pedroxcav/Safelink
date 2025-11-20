@@ -1,8 +1,7 @@
 package com.safelink.api.controller;
 
-import com.safelink.api.model.Relato;
-import com.safelink.api.model.dto.relato.NewRelatoDTO;
-import com.safelink.api.model.dto.relato.RelatoDTO;
+import com.safelink.api.controller.dto.relato.NewRelatoDTO;
+import com.safelink.api.controller.dto.relato.RelatoDTO;
 import com.safelink.api.model.enums.TipoDado;
 import com.safelink.api.service.RelatoService;
 import org.springframework.http.HttpStatus;

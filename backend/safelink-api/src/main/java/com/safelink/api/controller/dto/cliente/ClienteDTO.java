@@ -1,7 +1,7 @@
-package com.safelink.api.model.dto.cliente;
+package com.safelink.api.controller.dto.cliente;
 
 import com.safelink.api.model.Cliente;
-import com.safelink.api.model.dto.telefone.TelefoneDTO;
+import com.safelink.api.controller.dto.telefone.TelefoneDTO;
 
 import java.util.UUID;
 

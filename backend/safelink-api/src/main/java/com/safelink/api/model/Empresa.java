@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 import com.safelink.api.model.enums.*;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -28,5 +28,5 @@ public class Empresa extends Usuario {
     private String site;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.REMOVE)
-    private Set<Link> links;
+    private List<Link> links;
 }

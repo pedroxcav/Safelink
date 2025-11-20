@@ -1,4 +1,4 @@
-package com.safelink.api.model.dto.relato;
+package com.safelink.api.controller.dto.relato;
 
 import com.safelink.api.model.Relato;
 import com.safelink.api.model.enums.TipoCanal;
