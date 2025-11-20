@@ -1,6 +1,7 @@
 package com.safelink.api.model;
 
 import com.safelink.api.model.enums.TipoCanal;
+import com.safelink.api.model.enums.TipoDado;
 import com.safelink.api.model.enums.TipoGolpe;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,9 +34,12 @@ public class Relato {
     @Column(nullable = false)
     private LocalDate data;
 
-    @OneToOne
-    @JoinColumn(name = "dado_id", nullable = false)
-    private DadoEnvolvido dadoEnvolvido;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TipoDado tipoDado;
+
+    @Column(nullable = false)
+    private String informacao;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)

@@ -1,6 +1,4 @@
-
-
-export async function  handleLoginEmpresa(event, empresaEmail, empresaPassword){
+export async function  handleLoginEmpresa(event, empresaEmail, empresaPassword) {
     event.preventDefault()
 
     try{

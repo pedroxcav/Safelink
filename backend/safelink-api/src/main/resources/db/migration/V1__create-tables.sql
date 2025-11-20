@@ -1,7 +1,3 @@
-CREATE TYPE TIPOGOLPE AS ENUM ('Golpe do Presente', 'Phishing / Roubo de credenciais', 'Taxa de entrega / Frete falso', 'Transferência PIX', 'Outro');
-CREATE TYPE TIPOCANAL AS ENUM ('Whatsapp', 'SMS', 'Instagram', 'Web');
-CREATE TYPE TIPODADO AS ENUM ('CPF', 'Senha', 'Dados do cartão', 'Transferência do PIX', 'E-mail', 'Outros');
-
 CREATE TABLE TELEFONE_TABLE(
   id uuid PRIMARY KEY,
   ddd char(3) NOT NULL,
@@ -34,7 +30,7 @@ CREATE TABLE EMPRESA_TABLE (
 
 CREATE TABLE CLIENTE_TABLE (
   usuario_id uuid PRIMARY KEY,
-  cpf char(11) NOT NULL UNIQUE,
+  cpf char(14) NOT NULL UNIQUE,
 
   CONSTRAINT fk_cliente_usuario
     FOREIGN KEY (usuario_id) REFERENCES USUARIO_TABLE(id)
@@ -52,23 +48,15 @@ CREATE TABLE LINK_TABLE (
       ON DELETE CASCADE
 );
 
-CREATE TABLE DADO_ENVOLVIDO_TABLE(
-  id uuid PRIMARY KEY,
-  tipo_dado TIPODADO NOT NULL,
-  informacao varchar NOT NULL
-);
-
 CREATE TABLE RELATO_TABLE(
   id uuid PRIMARY KEY,
-  tipo_golpe TIPOGOLPE NOT NULL,
-  canal TIPOCANAL NOT NULL,
+  tipo_golpe VARCHAR NOT NULL,
+  canal VARCHAR NOT NULL,
   descricao varchar,
   data date NOT NULL,
-  dado_id uuid NOT NULL,
+  tipo_dado VARCHAR NOT NULL,
+  informacao varchar NOT NULL,
   cliente_id uuid NOT NULL,
-
-  CONSTRAINT fk_relato_dado
-    FOREIGN KEY (dado_id) REFERENCES DADO_ENVOLVIDO_TABLE(id),
 
   CONSTRAINT fk_relato_cliente
     FOREIGN KEY (cliente_id) REFERENCES CLIENTE_TABLE(usuario_id)

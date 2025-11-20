@@ -6,6 +6,7 @@ import com.safelink.api.model.Telefone;
 import com.safelink.api.model.Usuario;
 import com.safelink.api.model.dto.telefone.NewTelefoneDTO;
 import com.safelink.api.model.dto.telefone.TelefoneDTO;
+import com.safelink.api.model.dto.telefone.UpdateTelefoneDTO;
 import com.safelink.api.repository.TelefoneRepository;
 import com.safelink.api.repository.UsuarioRepository;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
@@ -27,10 +28,12 @@ public class TelefoneService {
         return new Telefone(data.ddd(), data.numero());
     }
 
-    public void updateTelefone(TelefoneDTO data) {
-        Telefone telefone = telefoneRepository.findById(data.id())
+    public void updateTelefone(UpdateTelefoneDTO data, JwtAuthenticationToken token) {
+        UUID userId = UUID.fromString(token.getName());
+        Usuario usuario = usuarioRepository.findById(userId)
                 .orElseThrow(NotFoundException::new);
 
+        Telefone telefone = usuario.getTelefone();
         telefone.setDdd(data.ddd());
         telefone.setNumero(data.numero());
 

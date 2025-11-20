@@ -1,12 +1,10 @@
 package com.safelink.api.model.enums;
 
 public enum TipoDado {
-    CPF("CPF"),
-    SENHA("Senha"),
-    DADOS_CARTAO("Dados do cartão"),
-    TRANSFERENCIA_PIX("Transferência do PIX"),
-    EMAIL("E-mail"),
-    OUTROS("Outros");
+    SITE("Site"),
+    TELEFONE("Telefone"),
+    TRANSFERENCIA_PIX("PIX"),
+    USUARIO("Usuario");
 
     private final String value;
 

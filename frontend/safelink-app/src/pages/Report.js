@@ -14,8 +14,8 @@ export default function Report() {
           <FormField label="Tipo de golpe">
             <Select defaultValue="Golpe do Presente">
               <option>Golpe do Presente</option>
-              <option>Phishing / Roubo de credenciais</option>
-              <option>Taxa de entrega / Frete falso</option>
+              <option>Roubo de credenciais</option>
+              <option>Taxa de entrega</option>
               <option>Transferência PIX</option>
               <option>Outro</option>
             </Select>
@@ -26,7 +26,7 @@ export default function Report() {
               <option>WhatsApp</option>
               <option>Instagram</option>
               <option>SMS</option>
-              <option>Web</option>
+              <option>Website</option>
             </Select>
           </FormField>
         </FormRow>
@@ -34,12 +34,11 @@ export default function Report() {
         <div className="row grid-3">
           <span className="label">Você informou/digitou algum dado?</span>
           <div className="checks">
-            <label><input type="checkbox" /> CPF</label>
-            <label><input type="checkbox" /> Senha</label>
-            <label><input type="checkbox" /> Dados do cartão</label>
-            <label><input type="checkbox" /> Transferência PIX</label>
-            <label><input type="checkbox" /> E-mail</label>
-            <label><input type="checkbox" /> Outros</label>
+            <label><input type="checkbox"/>Site</label>
+            <label><input type="checkbox"/>Telefone</label>
+            <label><input type="checkbox"/>PIX</label>
+            <label><input type="checkbox"/>Usuario</label>
+            <label><input type="checkbox"/>Outros</label>
           </div>
         </div>
 

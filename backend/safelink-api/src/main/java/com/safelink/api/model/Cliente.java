@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
-import java.util.Set;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,9 +17,9 @@ import java.util.UUID;
 public class Cliente extends Usuario {
 
     @CPF
-    @Column(nullable = false, unique = true, length = 11)
+    @Column(nullable = false, unique = true, length = 14)
     private String cpf;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE)
-    private Set<Relato> relatos;
+    private List<Relato> relatos;
 }

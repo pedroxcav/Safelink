@@ -54,8 +54,8 @@ export default function Home() {
         <Card>
           <div className="row grid-4">
             <div>
-              <h3 className="h3">Domínios</h3>
-              <RankList type="domain" items={[
+              <h3 className="h3">Sites</h3>
+              <RankList type="website" items={[
                 { value:'presente-boticario-gifts.xyz', count:76 },
                 { value:'promofrete-gratis.co', count:64 },
                 { value:'ganhe-brinde-acme.net', count:41 },
@@ -66,7 +66,7 @@ export default function Home() {
 
             <div>
               <h3 className="h3">Telefones</h3>
-              <RankList type="phone" items={[
+              <RankList type="telefone" items={[
                 { value:'(11) 9000-2300', count:58 },
                 { value:'(21) 9000-8800', count:44 },
                 { value:'(31) 9000-5100', count:33 },
@@ -77,18 +77,18 @@ export default function Home() {
 
             <div>
               <h3 className="h3">Chaves PIX</h3>
-              <RankList type="pix" items={[
+              <RankList type="chave" items={[
                 { value:'promo@ofertasmail.com', count:52 },
                 { value:'chavepix.ganhe@outlook.com', count:39 },
-                { value:'cpf 556.324.117-11', count:31 },
+                { value:'556.324.117-11', count:31 },
                 { value:'aleatorio-8342-xy', count:24 },
-                { value:'telefone (11) 9000-2300', count:19 },
+                { value:'(11) 9000-2300', count:19 },
               ]}/>
             </div>
 
             <div>
               <h3 className="h3">@Perfis</h3>
-              <RankList type="handle" items={[
+              <RankList type="usuario" items={[
                 { value:'@presentes_gratis_oficial', count:67 },
                 { value:'@boticario_kits_2025', count:49 },
                 { value:'@acme_brindes_fake', count:36 },

@@ -5,112 +5,129 @@ import com.safelink.api.model.Telefone;
 import com.safelink.api.model.Usuario;
 import com.safelink.api.model.dto.telefone.NewTelefoneDTO;
 import com.safelink.api.model.dto.telefone.TelefoneDTO;
+import com.safelink.api.model.dto.telefone.UpdateTelefoneDTO;
+import com.safelink.api.model.enums.Role;
 import com.safelink.api.repository.TelefoneRepository;
 import com.safelink.api.repository.UsuarioRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.oauth2.jwt.Jwt;
+import org.junit.jupiter.api.BeforeEach;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
-import java.time.Instant;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TelefoneServiceTest {
 
+    @Mock
     private TelefoneRepository telefoneRepository;
+
+    @Mock
     private UsuarioRepository usuarioRepository;
-    private TelefoneService service;
+
+    @InjectMocks
+    private TelefoneService telefoneService;
+
+    private Usuario usuario;
+    private Telefone telefone;
+    private UUID userId;
 
     @BeforeEach
     void setup() {
-        telefoneRepository = mock(TelefoneRepository.class);
-        usuarioRepository = mock(UsuarioRepository.class);
-        service = new TelefoneService(telefoneRepository, usuarioRepository);
+        MockitoAnnotations.openMocks(this);
+
+        telefone = new Telefone("11", "999999999");
+
+        usuario = new UsuarioFake(
+                UUID.randomUUID(),
+                "Pedro",
+                "email@email.com",
+                "senha",
+                telefone,
+                Role.CLIENTE
+        );
+
+        userId = usuario.getId();
+    }
+
+    static class UsuarioFake extends Usuario {
+        public UsuarioFake(UUID id, String nome, String email, String senha, Telefone telefone, Role role) {
+            super(id, nome, email, senha, telefone, role);
+        }
     }
 
     @Test
-    @DisplayName("Criar telefone com dados válidos")
-    void createTelefone_ok() {
-        NewTelefoneDTO dto = new NewTelefoneDTO("11", "988887777");
-        Telefone tel = service.createTelefone(dto);
+    @DisplayName("createTelefone() → Deve criar um telefone corretamente")
+    void testCreateTelefone() {
+        NewTelefoneDTO dto = new NewTelefoneDTO("21", "888888888");
 
-        assertEquals("11", tel.getDdd());
-        assertEquals("988887777", tel.getNumero());
+        Telefone result = telefoneService.createTelefone(dto);
+
+        assertEquals("21", result.getDdd());
+        assertEquals("888888888", result.getNumero());
     }
 
     @Test
-    @DisplayName("Atualizar telefone existente")
-    void updateTelefone_ok() {
-        UUID id = UUID.randomUUID();
-        Telefone tel = new Telefone();
-        tel.setId(id);
+    @DisplayName("updateTelefone() → Deve atualizar o telefone do usuário com sucesso")
+    void testUpdateTelefoneSuccess() {
+        UpdateTelefoneDTO dto = new UpdateTelefoneDTO("31", "777777777");
 
-        TelefoneDTO dto = new TelefoneDTO(id, "21", "900000000");
+        JwtAuthenticationToken token = mock(JwtAuthenticationToken.class);
+        when(token.getName()).thenReturn(userId.toString());
+        when(usuarioRepository.findById(userId)).thenReturn(Optional.of(usuario));
 
-        when(telefoneRepository.findById(id)).thenReturn(Optional.of(tel));
+        telefoneService.updateTelefone(dto, token);
 
-        service.updateTelefone(dto);
-
-        assertEquals("21", tel.getDdd());
-        assertEquals("900000000", tel.getNumero());
-        verify(telefoneRepository).save(tel);
+        assertEquals("31", telefone.getDdd());
+        assertEquals("777777777", telefone.getNumero());
+        verify(telefoneRepository, times(1)).save(telefone);
     }
 
     @Test
-    @DisplayName("Atualizar telefone inexistente deve lançar exceção")
-    void updateTelefone_notFound() {
-        UUID id = UUID.randomUUID();
-        TelefoneDTO dto = new TelefoneDTO(id, "11", "9999");
+    @DisplayName("updateTelefone() → Deve lançar NotFoundException quando usuário não existir")
+    void testUpdateTelefoneUserNotFound() {
+        UpdateTelefoneDTO dto = new UpdateTelefoneDTO("31", "777777777");
 
-        when(telefoneRepository.findById(id)).thenReturn(Optional.empty());
+        JwtAuthenticationToken token = mock(JwtAuthenticationToken.class);
+        when(token.getName()).thenReturn(userId.toString());
+        when(usuarioRepository.findById(userId)).thenReturn(Optional.empty());
 
-        assertThrows(NotFoundException.class, () -> service.updateTelefone(dto));
+        assertThrows(NotFoundException.class,
+                () -> telefoneService.updateTelefone(dto, token)
+        );
+
+        verify(telefoneRepository, never()).save(any());
     }
 
     @Test
-    @DisplayName("Buscar telefone do usuário autenticado")
-    void getTelefone_ok() {
-        UUID id = UUID.randomUUID();
-        Telefone tel = new Telefone("11", "999999999");
-        tel.setId(UUID.randomUUID());
+    @DisplayName("getTelefone() → Deve retornar o telefone do usuário corretamente")
+    void testGetTelefoneSuccess() {
+        JwtAuthenticationToken token = mock(JwtAuthenticationToken.class);
+        when(token.getName()).thenReturn(userId.toString());
+        when(usuarioRepository.findById(userId)).thenReturn(Optional.of(usuario));
 
-        class UsuarioFake extends Usuario {}
-        Usuario u = new UsuarioFake();
-        u.setId(id);
-        u.setTelefone(tel);
+        TelefoneDTO dto = telefoneService.getTelefone(token);
 
-        when(usuarioRepository.findById(id)).thenReturn(Optional.of(u));
-
-        var token = new JwtAuthenticationToken(mockJwt(id.toString()));
-
-        TelefoneDTO resp = service.getTelefone(token);
-
-        assertEquals(tel.getId(), resp.id());
-        assertEquals("11", resp.ddd());
+        assertEquals(telefone.getDdd(), dto.ddd());
+        assertEquals(telefone.getNumero(), dto.numero());
     }
 
     @Test
-    @DisplayName("Buscar telefone de usuário inexistente deve lançar exceção")
-    void getTelefone_notFound() {
-        UUID id = UUID.randomUUID();
+    @DisplayName("getTelefone() → Deve lançar NotFoundException quando usuário não existe")
+    void testGetTelefoneUserNotFound() {
+        JwtAuthenticationToken token = mock(JwtAuthenticationToken.class);
+        when(token.getName()).thenReturn(userId.toString());
+        when(usuarioRepository.findById(userId)).thenReturn(Optional.empty());
 
-        when(usuarioRepository.findById(id)).thenReturn(Optional.empty());
-
-        var token = new JwtAuthenticationToken(mockJwt(id.toString()));
-
-        assertThrows(NotFoundException.class, () -> service.getTelefone(token));
-    }
-
-    private Jwt mockJwt(String subject) {
-        Map<String, Object> headers = Map.of("alg", "none");
-        Map<String, Object> claims = Map.of("sub", subject);
-        Instant now = Instant.now();
-        return new Jwt("tokenValue", now, now.plusSeconds(3600), headers, claims);
+        assertThrows(NotFoundException.class,
+                () -> telefoneService.getTelefone(token)
+        );
     }
 }

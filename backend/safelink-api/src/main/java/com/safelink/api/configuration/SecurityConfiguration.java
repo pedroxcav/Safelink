@@ -55,11 +55,18 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE,
                                 "/empresa").hasAuthority("SCOPE_EMPRESA")
                         .requestMatchers(HttpMethod.GET,
-                                "/cliente").hasAuthority("SCOPE_CLIENTE")
+                                "/cliente",
+                                "/relato").hasAuthority("SCOPE_CLIENTE")
                         .requestMatchers(HttpMethod.PUT,
                                 "/cliente").hasAuthority("SCOPE_CLIENTE")
                         .requestMatchers(HttpMethod.DELETE,
-                                "/cliente").hasAuthority("SCOPE_CLIENTE")
+                                "/cliente",
+                                "/relato/{id}").hasAuthority("SCOPE_CLIENTE")
+                        .requestMatchers(HttpMethod.POST,
+                                "/relato").hasAuthority("SCOPE_CLIENTE")
+                        .requestMatchers(HttpMethod.GET,
+                                "/relato/dado",
+                                "/relato/verifica").permitAll()
                         .requestMatchers(HttpMethod.POST,
                                 "/empresa",
                                 "/cliente",

@@ -1,6 +1,7 @@
 package com.safelink.api.controller;
 
 import com.safelink.api.model.dto.telefone.TelefoneDTO;
+import com.safelink.api.model.dto.telefone.UpdateTelefoneDTO;
 import com.safelink.api.service.TelefoneService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,8 @@ public class TelefoneController {
     public TelefoneController(TelefoneService telefoneService) {this.telefoneService = telefoneService;}
 
     @PutMapping
-    public ResponseEntity<Void> updateTelefone(@RequestBody @Valid TelefoneDTO data) {
-        telefoneService.updateTelefone(data);
+    public ResponseEntity<Void> updateTelefone(@RequestBody @Valid UpdateTelefoneDTO data, JwtAuthenticationToken token) {
+        telefoneService.updateTelefone(data, token);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

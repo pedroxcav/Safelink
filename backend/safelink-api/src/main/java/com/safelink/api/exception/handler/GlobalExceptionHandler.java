@@ -31,6 +31,11 @@ public class GlobalExceptionHandler {
         return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
+    @ExceptionHandler(LoginFailedException.class)
+    public ResponseEntity<Object> handleLoginFailed(LoginFailedException ex) {
+        return buildResponse(HttpStatus.UNAUTHORIZED, ex.getMessage());
+    }
+
     private ResponseEntity<Object> buildResponse(HttpStatus status, Object message) {
         Map<String, Object> body = new HashMap<>();
 
