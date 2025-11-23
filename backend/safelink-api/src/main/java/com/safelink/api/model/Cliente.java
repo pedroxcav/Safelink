@@ -1,13 +1,10 @@
 package com.safelink.api.model;
 
-import com.safelink.api.model.enums.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Getter @Setter

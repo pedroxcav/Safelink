@@ -22,6 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -49,11 +50,15 @@ public class SecurityConfiguration {
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.GET,
-                                "/empresa").hasAuthority("SCOPE_EMPRESA")
+                                "/empresa",
+                                "/link").hasAuthority("SCOPE_EMPRESA")
                         .requestMatchers(HttpMethod.PUT,
                                 "/empresa").hasAuthority("SCOPE_EMPRESA")
                         .requestMatchers(HttpMethod.DELETE,
-                                "/empresa").hasAuthority("SCOPE_EMPRESA")
+                                "/empresa",
+                                "/link").hasAuthority("SCOPE_EMPRESA")
+                        .requestMatchers(HttpMethod.POST,
+                                "/link").hasAuthority("SCOPE_EMPRESA")
                         .requestMatchers(HttpMethod.GET,
                                 "/cliente",
                                 "/relato").hasAuthority("SCOPE_CLIENTE")
@@ -113,5 +118,10 @@ public class SecurityConfiguration {
         JWK jwk = new RSAKey.Builder(pubKey).privateKey(privKey).build();
         var jwks = new ImmutableJWKSet<>(new JWKSet(jwk));
         return new NimbusJwtEncoder(jwks);
+    }
+
+    @Bean
+    public WebClient webClient(WebClient.Builder builder) {
+        return builder.baseUrl("https://safelink-cybh.onrender.com").build();
     }
 }
