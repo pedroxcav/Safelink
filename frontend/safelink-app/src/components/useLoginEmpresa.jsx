@@ -25,18 +25,19 @@ export function  useLoginEmpresa() {
                     senha: empresaPassword
             })
         });
-        if(requestData.ok){        
-            const data = await requestData.json();
+        if(!requestData.ok){        
+            throw new Error('E-mail ou senha incorretos');
+        }
+        const data = await requestData.json();
 
-            login(data.token)
-            localStorage.setItem("user", data.token);
+        login(data.token)
+        localStorage.setItem("user", data.token);
 
-            console.log("Resposta do backend", data)
-            navigate("/");
-
-    }
+        console.log("Resposta do backend", data)
+        navigate("/");
     } catch (err) {
         console.error("Erro no login ", err)
+        throw err
     }
     }
 

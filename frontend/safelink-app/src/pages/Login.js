@@ -22,11 +22,46 @@ export default function Login() {
   const [empresaEmail, setEmpresaEmail] = useState("");
   const [empresaPassword, setEmpresaPassword] = useState("");
   
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   
+  async function handleLoginUsuario(e, email, senha) {
+    e.preventDefault();
+    try {
+      await loginUsuario(e, email, senha);
+    } catch (err) {
+      setErrorMessage("E-mail ou senha incorretos!");
+      setShowPopup(true);
+    }
+  }
+
+  
+  async function handleLoginEmpresa(e, email, senha) {
+    e.preventDefault();
+    try {
+      await loginEmpresa(e, email, senha);
+    } catch (err) {
+      setErrorMessage("E-mail ou senha incorretos!");
+      setShowPopup(true);
+    }
+  }
+
   return (
     <>
+
+     
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>{errorMessage}</p>
+            <Button onClick={() => setShowPopup(false)}>Fechar</Button>
+          </div>
+        </div>
+      )}
+
+
       <Section title="Clientes" subtitle="Acesse sua conta para ver seus incidentes, relatos e configurações.">
-        <Card as="form" onSubmit={(e) => loginUsuario(e, usuarioEmail, usuarioPassword)}>
+        <Card as="form" onSubmit={(e) => handleLoginUsuario(e, usuarioEmail, usuarioPassword)}>
           <FormRow cols={2}>
             <FormField label="E-mail"><Input type="text" 
             placeholder="usuario@email.com" 
@@ -54,7 +89,7 @@ export default function Login() {
       </Section>
 
       <Section title="Empresas" subtitle="Acesse sua conta para ver seus incidentes, relatos e configurações.">
-        <Card as="form" onSubmit={(e) => loginEmpresa(e, empresaEmail, empresaPassword)}>
+        <Card as="form" onSubmit={(e) => handleLoginEmpresa(e, empresaEmail, empresaPassword)}>
           <FormRow cols={2}>
             <FormField label="E-mail"><Input type="text" 
             placeholder="usuario@email.com" 

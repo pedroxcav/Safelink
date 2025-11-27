@@ -15,7 +15,7 @@ export function  useLoginUsuario() {
         event.preventDefault()
         
         try{
-            const requestData = await fetch('http://localhost:8080/empresa/login',{
+            const requestData = await fetch('http://localhost:8080/cliente/login',{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -25,18 +25,21 @@ export function  useLoginUsuario() {
                     senha: usuarioPassword
             })
         });
-        if(requestData.ok){        
-            const data = await requestData.json();
+        if(!requestData.ok){        
+            
+            throw new Error("Usuario e/ou senha incorretos.")
+        }
+        const data = await requestData.json();
 
-            login(data.token)
-            localStorage.setItem("user", data.token);
+        login(data.token)
+        localStorage.setItem("user", data.token);
 
-            console.log("Resposta do backend", data)
-            navigate("/");
-
-    }
+        console.log("Resposta do backend", data)
+        navigate("/");
+   
     } catch (err) {
         console.error("Erro no login ", err)
+        throw err
     }
     }
 
