@@ -94,6 +94,8 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
       setShowPopup(true);
     }
   }
+
+  
   function formatarCPF(value) {
   value = value.replace(/\D/g, "");
 
