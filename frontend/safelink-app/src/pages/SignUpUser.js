@@ -58,7 +58,7 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
     console.log(telefoneFormatoCerto)
 
     try {
-      const requestData = await fetch('http://localhost:8080/empresa/login', {
+      const requestData = await fetch('http://localhost:8080/cliente', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
