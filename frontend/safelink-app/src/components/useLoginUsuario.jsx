@@ -33,6 +33,7 @@ export function  useLoginUsuario() {
 
         login(data.token)
         localStorage.setItem("user", data.token);
+        localStorage.setItem("isUsuario", "true")
 
         console.log("Resposta do backend", data)
         navigate("/");
