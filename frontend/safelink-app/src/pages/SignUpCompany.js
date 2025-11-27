@@ -5,8 +5,36 @@ import FormField from '../components/Form/FormField';
 import Input from '../components/Form/Input';
 import Button from '../components/UI/Button';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
+
+
+
 
 export default function SignUpCompany() {
+  const [empresaRazao, setEmpresaRazao] = useState("");
+  const [empresaNome, setEmpresaNome] = useState("");
+  const [empresaCNPJ, setEmpresaCNPJ] = useState("");
+  const [empresaEmail, setEmpresaEmail] = useState("");
+  const [empresaSite, setEmpresaSite] = useState("");
+  const [empresaSenha, setEmpresaSenha] = useState("");
+  const [empresaTelefone, setEmpresaTelefone] = useState({
+  ddd: "",
+  numero: ""
+});
+
+ function handleTelefoneChange(e) {
+  const input = e.target.value.replace(/\D/g, ""); 
+
+  const ddd = input.substring(0, 2);
+  const numero = input.substring(2);
+
+  setEmpresaTelefone({ ddd, numero });
+}
+  
+  const [empresaSenhaConfirmacao, setEmpresaSenhaConfirmacao] = useState("");
+  
+  
   return (
     <Section title="Criar conta" subtitle="Crie o perfil da sua organização para gerar links seguros e campanhas verificadas.">
       <Card as="form" onSubmit={(e) => e.preventDefault()}>
@@ -22,7 +50,11 @@ export default function SignUpCompany() {
 
         <FormRow cols={2}>
           <FormField label="E-mail corporativo"><Input type="text" placeholder="contato@acme.com" /></FormField>
-          <FormField label="Telefone comercial"><Input type="text" placeholder="(11) 3333-4444" /></FormField>
+          <FormField label="Telefone comercial"><Input 
+          type="text" 
+          placeholder="(11) 3333-4444" 
+          onChange={handleTelefoneChange}
+          /></FormField>
         </FormRow>
 
         <div className="terms">
