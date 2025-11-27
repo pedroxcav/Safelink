@@ -13,7 +13,7 @@ export async function  handleLoginEmpresa(event, empresaEmail, empresaPassword) 
             })
         });
         const data = await requestData.json();
-        console.log("respoutsoa", data)
+        console.log("Resposta do backend", data)
     } catch {
 
     }
