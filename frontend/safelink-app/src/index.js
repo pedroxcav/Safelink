@@ -10,9 +10,12 @@ import Guide from './pages/Guide';
 import Report from './pages/Report';
 import SignUpUser from './pages/SignUpUser';
 import SignUpCompany from './pages/SignUpCompany';
-
-// 1 - Configurando Router
+import PerfilLogado from './pages/PerfilLogado';
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
+
+import ProtectedRouteLogin from './components/ProtectedRouteLogin';
+
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -32,13 +35,20 @@ const router = createBrowserRouter([
         element: <Guide/>
       },{
         path: 'login',
-        element: <Login/>
+        element: (
+        <ProtectedRouteLogin>
+          <Login />
+        </ProtectedRouteLogin> 
+        )
       },{
         path: 'register-company',
         element: <SignUpCompany/>
       },{
         path: 'register-user',
         element: <SignUpUser/>
+      },{
+        path: 'perfil',
+        element: <PerfilLogado/>
       }
     ] 
   }

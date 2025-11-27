@@ -5,8 +5,8 @@ import FormField from '../components/Form/FormField';
 import Input from '../components/Form/Input';
 import Button from '../components/UI/Button';
 import { Link } from 'react-router-dom';
-import { handleLoginEmpresa } from '../components/LoginHandlerEmpresa';
-import { handleLoginUsuario } from '../components/LoginHandlerUsuario';
+import { useLoginEmpresa } from '../components/useLoginEmpresa';
+import { useLoginUsuario } from '../components/useLoginUsuario';
 import { useState } from 'react';
 
 
@@ -14,6 +14,9 @@ import { useState } from 'react';
 
 export default function Login() {
   
+  const { loginEmpresa } = useLoginEmpresa();
+  const { loginUsuario } = useLoginUsuario();
+
   const [usuarioEmail, setUsuarioEmail] = useState("");
   const [usuarioPassword, setUsuarioPassword] = useState("");
   const [empresaEmail, setEmpresaEmail] = useState("");
@@ -23,7 +26,7 @@ export default function Login() {
   return (
     <>
       <Section title="Clientes" subtitle="Acesse sua conta para ver seus incidentes, relatos e configurações.">
-        <Card as="form" onSubmit={(e) => handleLoginUsuario(e, usuarioEmail, usuarioPassword)}>
+        <Card as="form" onSubmit={(e) => loginUsuario(e, usuarioEmail, usuarioPassword)}>
           <FormRow cols={2}>
             <FormField label="E-mail"><Input type="text" 
             placeholder="usuario@email.com" 
@@ -51,7 +54,7 @@ export default function Login() {
       </Section>
 
       <Section title="Empresas" subtitle="Acesse sua conta para ver seus incidentes, relatos e configurações.">
-        <Card as="form" onSubmit={(e) => handleLoginEmpresa(e, empresaEmail, empresaPassword)}>
+        <Card as="form" onSubmit={(e) => loginEmpresa(e, empresaEmail, empresaPassword)}>
           <FormRow cols={2}>
             <FormField label="E-mail"><Input type="text" 
             placeholder="usuario@email.com" 

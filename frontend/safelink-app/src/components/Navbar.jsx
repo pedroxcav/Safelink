@@ -1,6 +1,14 @@
 import { NavLink } from "react-router-dom";
 
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
+
 export default function Navbar() {
+  
+  
+  const { user } = useContext(UserContext);
+  
+  
   return (
     <header id="nav" role="banner" aria-label="Barra de navegação">
       <div id="tabs">
@@ -26,14 +34,19 @@ export default function Navbar() {
         >
           Relatar
         </NavLink>
+        
+        {!user && (
+          <NavLink to="/login" className="tab">
+            Perfil
+          </NavLink>
+        )}
+        
+        {user && (
+          <NavLink to="/perfil" className="tab">
+            Meu Perfil
+          </NavLink>
+        )}
 
-        <NavLink
-          to="/login"
-          className={({ isActive }) => "tab" + (isActive ? " active" : "")}
-          aria-label="Entrar"
-        >
-          Perfil
-        </NavLink>
       </div>
     </header>
   );
