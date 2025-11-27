@@ -6,10 +6,12 @@ import Input from '../components/Form/Input';
 import Button from '../components/UI/Button';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function SignUpUser() {
 
+  const navigate = useNavigate();
 const [usuarioEmail, setUsuarioEmail] = useState("");
   const [usuarioCPF, setUsuarioCPF] = useState("");
   const [usuarioNome, setUsuarioNome] = useState("");
@@ -21,6 +23,8 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
 
   const isFormValid =
   usuarioNome.trim() !== "" &&
@@ -56,6 +60,8 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
     }
     const telefoneFormatoCerto = getTelefoneObject(usuarioTelefone);
 
+  
+
     try {
       const request = await fetch('http://localhost:8080/cliente', {
         method: 'POST',
@@ -70,32 +76,36 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
       });
 
     let responseData;
-    const text = await request.text(); // lê como texto
+    const text = await request.text(); 
     try {
-      responseData = JSON.parse(text); // tenta converter em JSON
+      responseData = JSON.parse(text); 
     } catch {
-      responseData = text; // se não for JSON, mantém como texto
+      responseData = text; 
     }
 
     if (!request.ok) {
       console.error("Erro no servidor:", responseData);
       setErrorMessage("Erro ao cadastrar usuário.");
       setShowPopup(true);
+      setShouldRedirect(false);
       return;
     }
 
     console.log("Resposta do servidor:", responseData);
     setErrorMessage("Cadastro realizado com sucesso");
     setShowPopup(true);
+    setShouldRedirect(true)
+    
 
     } catch (error) {
       console.error("Erro ao fazer a requisição:", error);
       setErrorMessage("Erro ao cadastrar usuário.");
       setShowPopup(true);
+      setShouldRedirect(false);
     }
   }
 
-  
+
   function formatarCPF(value) {
   value = value.replace(/\D/g, "");
 
@@ -140,6 +150,13 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
     setUsuarioTelefone(value);
 }
 
+function handleClosePopUp() {
+    setShowPopup(false);
+    if (shouldRedirect) {
+      navigate('/');  
+    }
+  }
+
 
   return (
     <Section title="Criar conta" subtitle="Cadastre-se para salvar incidentes, acompanhar relatos e receber guias personalizados.">
@@ -148,7 +165,7 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
         <div className="popup">
           <div className="popup-content">
             <p>{errorMessage}</p>
-            <Button onClick={() => setShowPopup(false)}>Fechar</Button>
+            <Button onClick={handleClosePopUp}>Fechar</Button>
           </div>
         </div>
       )}

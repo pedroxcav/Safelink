@@ -4,7 +4,7 @@ import FormRow from '../components/Form/FormRow';
 import FormField from '../components/Form/FormField';
 import Input from '../components/Form/Input';
 import Button from '../components/UI/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function SignUpCompany() {
@@ -21,6 +21,9 @@ export default function SignUpCompany() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  const navigate = useNavigate();
 
   const isFormValid =
     empresaNome.trim() !== "" &&
@@ -116,19 +119,30 @@ export default function SignUpCompany() {
         console.error("Erro no servidor:", responseData);
         setErrorMessage("Erro ao cadastrar empresa.");
         setShowPopup(true);
+        setShouldRedirect(false)
         return;
       }
 
       console.log("Resposta do servidor:", responseData);
       setErrorMessage("Cadastro realizado com sucesso");
       setShowPopup(true);
+      setShouldRedirect(true)
 
     } catch (error) {
       console.error("Erro ao fazer a requisição:", error);
       setErrorMessage("Erro ao cadastrar empresa.");
       setShowPopup(true);
+      setShouldRedirect(false)
     }
   }
+
+  function handleClosePopUp() {
+    setShowPopup(false);
+    if (shouldRedirect) {
+      navigate('/');  
+    }
+  }
+
 
   return (
     <Section title="Criar conta" subtitle="Cadastre sua empresa para gerenciar serviços e relatórios.">
@@ -136,7 +150,7 @@ export default function SignUpCompany() {
         <div className="popup">
           <div className="popup-content">
             <p>{errorMessage}</p>
-            <Button onClick={() => setShowPopup(false)}>Fechar</Button>
+            <Button onClick={handleClosePopUp}>Fechar</Button>
           </div>
         </div>
       )}
