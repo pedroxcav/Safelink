@@ -32,6 +32,7 @@ export function  useLoginEmpresa() {
 
         login(data.token)
         localStorage.setItem("user", data.token);
+        localStorage.setItem("isUsuario", "false")
 
         console.log("Resposta do backend", data)
         navigate("/");
