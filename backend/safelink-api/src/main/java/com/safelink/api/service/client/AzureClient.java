@@ -7,6 +7,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Component
 public class AzureClient {
     private final WebClient webClient2;
+    private final String apiKey = System.getenv("API_KEY");
 
     public AzureClient(WebClient webClient2) {
         this.webClient2 = webClient2;
@@ -33,7 +34,7 @@ public class AzureClient {
         String json = webClient2.post()
                 .bodyValue(body)
                 .header("Content-Type", "application/json")
-                .header("api-key", "8NHEl0p41159nFnuQ16TAEEXY3FWksEAAjsWKePvoO0p4h6dUlFgJQQJ99BKACfhMk5XJ3w3AAAAACOG52Ki")
+                .header("api-key", apiKey)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
