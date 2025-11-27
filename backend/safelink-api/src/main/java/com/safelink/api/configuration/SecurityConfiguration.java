@@ -121,7 +121,12 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public WebClient webClient(WebClient.Builder builder) {
+    public WebClient webClient1(WebClient.Builder builder) {
         return builder.baseUrl("https://safelink-cybh.onrender.com").build();
+    }
+
+    @Bean
+    public WebClient webClient2(WebClient.Builder builder) {
+        return builder.baseUrl("https://pedro-migsxch2-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-5-chat/chat/completions?api-version=2025-01-01-preview").build();
     }
 }
