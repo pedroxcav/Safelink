@@ -1,5 +1,6 @@
 package com.safelink.api.controller;
 
+import com.safelink.api.controller.dto.ActionGuideDTO;
 import com.safelink.api.controller.dto.relato.NewRelatoDTO;
 import com.safelink.api.controller.dto.relato.RelatoDTO;
 import com.safelink.api.model.enums.TipoDado;
@@ -22,9 +23,9 @@ public class RelatoController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createRelato(@RequestBody NewRelatoDTO data, JwtAuthenticationToken token){
-        relatoService.createRelato(data, token);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<ActionGuideDTO> createRelato(@RequestBody NewRelatoDTO data, JwtAuthenticationToken token){
+        ActionGuideDTO guide = relatoService.createRelato(data, token);
+        return ResponseEntity.status(HttpStatus.CREATED).body(guide);
     }
 
     @DeleteMapping("/{id}")
