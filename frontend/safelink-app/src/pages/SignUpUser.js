@@ -55,10 +55,9 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
       return;
     }
     const telefoneFormatoCerto = getTelefoneObject(usuarioTelefone);
-    console.log(telefoneFormatoCerto)
 
     try {
-      const requestData = await fetch('http://localhost:8080/cliente', {
+      const request = await fetch('http://localhost:8080/cliente', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -70,12 +69,27 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
         })
       });
 
-      const data = await requestData.json();
-      console.log("Resposta do servidor:", data);
-      setErrorMessage("Cadastro realizado com sucesso")
-      setShowPopup(true)
+    let responseData;
+    const text = await request.text(); // lê como texto
+    try {
+      responseData = JSON.parse(text); // tenta converter em JSON
+    } catch {
+      responseData = text; // se não for JSON, mantém como texto
+    }
+
+    if (!request.ok) {
+      console.error("Erro no servidor:", responseData);
+      setErrorMessage("Erro ao cadastrar usuário.");
+      setShowPopup(true);
+      return;
+    }
+
+    console.log("Resposta do servidor:", responseData);
+    setErrorMessage("Cadastro realizado com sucesso");
+    setShowPopup(true);
 
     } catch (error) {
+      console.error("Erro ao fazer a requisição:", error);
       setErrorMessage("Erro ao cadastrar usuário.");
       setShowPopup(true);
     }
@@ -147,7 +161,7 @@ const [usuarioEmail, setUsuarioEmail] = useState("");
           onChange = {(e) => setUsuarioNome(e.target.value)} /></FormField>
           
           
-          <FormField label="Telefone (opcional)">
+          <FormField label="Telefone">
             
           <Input type="tel" 
           placeholder="(11) 93333-4444" 
