@@ -5,7 +5,8 @@ import Button from "../components/UI/Button";
 import Input from "../components/Form/Input";
 import { UserContext } from "../components/UserContext";
 import { useNavigate } from "react-router-dom";
-
+import ReportItem from '../components/Lists/ReportItem';
+import ResultHeader from '../components/ResultHeader';
 
 export default function PerfilLogado() {
   const { user, setUser , logout } = useContext(UserContext);
@@ -15,6 +16,15 @@ export default function PerfilLogado() {
   const [popupMessage, setPopupMessage] = useState('');
   const [linkDaEmpresa, setLinkDaEmpresa] = useState('');
   const [links, setLinks] = useState([])
+  const [sites, setSites] = useState([]);
+  const [phones, setPhones] = useState([]);
+  const [pixKeys, setPixKeys] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+
+  const [searchType, setSearchType] = useState("SITE");
+  const [searchValue, setSearchValue] = useState("");
+  const [reports, setReports] = useState([]);;
+
   function handleLogout() {
     setPopupMessage('Logout realizado com sucesso!');
     setShowPopup(true);
@@ -22,6 +32,43 @@ export default function PerfilLogado() {
     
     
   }
+
+  
+
+  function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString("pt-BR");
+  }
+
+  function mapType(label) {
+    switch (label) {
+      case "Link": return "SITE";
+      case "Telefone": return "TELEFONE";
+      case "Chave PIX": return "TRANSFERENCIA_PIX";
+      case "@Perfil": return "USUARIO";
+      default: return "SITE";
+    }
+  }
+
+  function handleSearch() {
+    
+
+    const tipoAPI = mapType(searchType);
+    const token = localStorage.getItem("user")
+    fetch(`http://localhost:8080/relato`,{
+                method: "GET",
+                headers:{
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }}
+        ).then(res => res.json())
+      .then(data => {
+        setReports(data.slice(0, 2));
+      })
+      .catch(err => console.error(err));
+  }
+
+ 
 
   function gerarLinkEncurtado(){
 
@@ -127,6 +174,9 @@ export default function PerfilLogado() {
 
             setLinks(linksEncurtados)
         }).catch(err => console.error("Erro:", err))}
+        else{
+            handleSearch();
+        }
 
   }, [logout, navigate, setUser]);
 
@@ -229,6 +279,35 @@ return (
 ) : (
   <p style={{ marginTop: "1rem", color: "#777" }}>Sem links criados</p>
 )}
+            
+
+            </>
+        )}
+
+        {isUsuario &&(
+            <>
+ <div className="sample">
+             <ResultHeader pill={{ level:'mid', text:`${reports.length} relatos encontrados` }} />
+ 
+             <h3 className="h3">Relatos recentes</h3>
+             <ul className="reports">
+               {reports.length === 0 && (
+                 <p className="muted">Nenhum relato encontrado.</p>
+               )}
+ 
+               {reports.map((r, i) => (
+                 <ReportItem
+                   key={r.id}
+                   when={formatDate(r.date)}
+                   chips={[
+                     { label: r.tipoCanal.toLowerCase() },
+                     { label: r.tipoGolpe.toLowerCase(), variant: "red" }
+                   ]}
+                   text={r.descricao}
+                 />
+               ))}
+             </ul>
+             </div>
             
 
             </>

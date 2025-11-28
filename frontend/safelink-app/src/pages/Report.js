@@ -7,9 +7,12 @@ import Textarea from '../components/Form/Textarea';
 import Button from '../components/UI/Button';
 import Input from '../components/Form/Input'
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
+
 
 export default function Report() {
 
+  const navigate = useNavigate()
   const [tipoGolpeInfo, setTipoGolpe] = useState("GOLPE_DO_PRESENTE");
   const [canal, setCanal] = useState("WHATSAPP");
   const [tipoRelato, setTipoRelato] = useState("");
@@ -62,8 +65,16 @@ export default function Report() {
       const text = await response.text();
       try {
         responseData = JSON.parse(text);
+        localStorage.setItem("tipoRelato", tipoRelato)
+        localStorage.setItem("tipoCanal", canal)
+        localStorage.setItem("guide",responseData.guide)
+        navigate('/report/guide')
       } catch {
         responseData = text;
+        localStorage.setItem("tipoRelato", tipoRelato)
+        localStorage.setItem("tipoCanal", canal)
+        localStorage.setItem("guide",responseData.guide)
+        navigate('/report/guide')
       }
 
       if (!response.ok) {
@@ -179,7 +190,10 @@ export default function Report() {
 
             
           </div>
-          <Input type="text" placeholder="Informe o dado" value={informacaoDoGolpe} onChange={(e) => setInformacaoDoGolpe(e.target.value)}/>
+          <Input type="text" 
+          placeholder="Informe o dado" 
+          value={informacaoDoGolpe} 
+          onChange={(e) => setInformacaoDoGolpe(e.target.value)}/>
         </div>
 
         <FormField label="Descreva o ocorrido (opcional)" className="block">

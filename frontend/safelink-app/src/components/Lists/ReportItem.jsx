@@ -10,7 +10,7 @@ export default function ReportItem({ when, chips=[], text, votesUp=0, votesDown=
         </span>
       </div>
       {text && <p>{text}</p>}
-      <div className="muted small">Utilidade: {votesUp} 👍 · {votesDown} 👎</div>
+      
     </li>
   );
 }
