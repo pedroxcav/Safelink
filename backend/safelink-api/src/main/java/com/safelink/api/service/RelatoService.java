@@ -1,6 +1,7 @@
 package com.safelink.api.service;
 
 import com.safelink.api.controller.dto.ActionGuideDTO;
+import com.safelink.api.controller.dto.RankingItemDTO;
 import com.safelink.api.exception.NotFoundException;
 import com.safelink.api.model.Cliente;
 import com.safelink.api.model.Relato;
@@ -12,8 +13,8 @@ import com.safelink.api.service.client.AzureClient;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class RelatoService {
@@ -67,9 +68,20 @@ public class RelatoService {
         return RelatoDTO.fromEntityList(relatos);
     }
 
-    public List<RelatoDTO> getRelatoByTipoDado(TipoDado tipoDado) {
-        List<Relato> relatos = relatoRepository.findByTipoDado(tipoDado);
-        return RelatoDTO.fromEntityList(relatos);
+    public List<RankingItemDTO> getRelatoByTipoDado(TipoDado tipoDado) {
+        List<String> informationList = relatoRepository.findInformacaoDinamicaNativo(tipoDado.toString());
+
+        Map<String, Integer> countableList = new HashMap<>();
+        for (String informacao : informationList) {
+            countableList.put(informacao, countableList.getOrDefault(informacao, 0) + 1);
+        }
+
+        return countableList.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(5)
+                .map(entry -> new RankingItemDTO(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 
     public List<RelatoDTO> getRelatoByInformacao(TipoDado tipoDado, String informacao) {
