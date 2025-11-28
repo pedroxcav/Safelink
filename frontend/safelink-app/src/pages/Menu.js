@@ -33,7 +33,7 @@ export default function Home() {
       .then(res => res.json())
       .then(data => {
         const formatted = data.map(item => ({
-          value: item.tipoDado,
+          value: item.informacao,
           count: item.quantidade
         }));
         setter(formatted);
