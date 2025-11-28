@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 import Section from '../components/Section';
 import Card from '../components/Card';
 import FormRow from '../components/Form/FormRow';
@@ -10,6 +12,32 @@ import RankList from '../components/Lists/RankList';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
+  // estados para cada ranking
+  const [sites, setSites] = useState([]);
+  const [phones, setPhones] = useState([]);
+  const [pixKeys, setPixKeys] = useState([]);
+  const [profiles, setProfiles] = useState([]);
+
+  useEffect(() => {
+    fetchRank("SITE", setSites);
+    fetchRank("TELEFONE", setPhones);
+    fetchRank("TRANSFERENCIA_PIX", setPixKeys);
+    fetchRank("USUARIO", setProfiles);
+  }, []);
+
+  function fetchRank(tipo, setter) {
+    fetch(`http://localhost:8080/relato/dado?tipo=${tipo}`)
+      .then(res => res.json())
+      .then(data => {
+        const formatted = data.map(item => ({
+          value: item.tipoDado,
+          count: item.quantidade
+        }));
+        setter(formatted);
+      })
+      .catch(err => console.error(err));
+  }
+
   return (
     <>
       <Section title="Reputação Comunitária" subtitle="Pesquise por domínio, telefone, chave PIX ou @perfil.">
@@ -27,6 +55,7 @@ export default function Home() {
 
           <div className="sample">
             <ResultHeader pill={{ level:'mid', text:'Risco MÉDIO (58)' }} />
+
             <h3 className="h3">Relatos recentes</h3>
             <ul className="reports">
               <ReportItem
@@ -42,10 +71,11 @@ export default function Home() {
                 votesUp={4} votesDown={0}
               />
             </ul>
+
             <div className="between muted mt">
               <span>Comunidade: 0 relatos</span>
               <Link className="link" to="/report">Criar denúncia</Link>
-          </div>
+            </div>
           </div>
         </Card>
       </Section>
@@ -53,49 +83,27 @@ export default function Home() {
       <Section title="Com mais frequência de golpes" subtitle="Domínios, telefones, chaves PIX e @perfis mais citados nos relatos.">
         <Card>
           <div className="row grid-4">
+
             <div>
               <h3 className="h3">Sites</h3>
-              <RankList type="website" items={[
-                { value:'presente-boticario-gifts.xyz', count:76 },
-                { value:'promofrete-gratis.co', count:64 },
-                { value:'ganhe-brinde-acme.net', count:41 },
-                { value:'ofertas-surpresa.app', count:35 },
-                { value:'sorteio-premios.live', count:28 },
-              ]}/>
+              <RankList type="website" items={sites} />
             </div>
 
             <div>
               <h3 className="h3">Telefones</h3>
-              <RankList type="telefone" items={[
-                { value:'(11) 9000-2300', count:58 },
-                { value:'(21) 9000-8800', count:44 },
-                { value:'(31) 9000-5100', count:33 },
-                { value:'(81) 9000-0900', count:27 },
-                { value:'(41) 9000-7400', count:22 },
-              ]}/>
+              <RankList type="telefone" items={phones} />
             </div>
 
             <div>
               <h3 className="h3">Chaves PIX</h3>
-              <RankList type="chave" items={[
-                { value:'promo@ofertasmail.com', count:52 },
-                { value:'chavepix.ganhe@outlook.com', count:39 },
-                { value:'556.324.117-11', count:31 },
-                { value:'aleatorio-8342-xy', count:24 },
-                { value:'(11) 9000-2300', count:19 },
-              ]}/>
+              <RankList type="chave" items={pixKeys} />
             </div>
 
             <div>
               <h3 className="h3">@Perfis</h3>
-              <RankList type="usuario" items={[
-                { value:'@presentes_gratis_oficial', count:67 },
-                { value:'@boticario_kits_2025', count:49 },
-                { value:'@acme_brindes_fake', count:36 },
-                { value:'@sorteio_mega_br_', count:28 },
-                { value:'@frete_gratis_hoje', count:22 },
-              ]}/>
+              <RankList type="usuario" items={profiles} />
             </div>
+
           </div>
         </Card>
       </Section>

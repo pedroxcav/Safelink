@@ -15,7 +15,6 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 import ProtectedRouteLogin from './components/ProtectedRouteLogin';
 
-
 const router = createBrowserRouter([
   {
     path: '/',
