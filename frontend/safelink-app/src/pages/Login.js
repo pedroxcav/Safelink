@@ -75,10 +75,7 @@ export default function Login() {
             /></FormField>
           </FormRow>
 
-          <div className="row between">
-            <label className="inline"><input type="checkbox" /> Manter-me conectado</label>
-            <Link to="#" className="muted small link">Esqueci minha senha</Link>
-          </div>
+         
 
           <div className='alignedItemsDiv'>
             <div className="hint" >Novo por aqui? <Link to="/register-user" className='link'>Crie sua conta</Link></div>
@@ -103,10 +100,7 @@ export default function Login() {
             /></FormField>
           </FormRow>
 
-          <div className="row between">
-            <label className="inline"><input type="checkbox" /> Manter-me conectado</label>
-            <Link to="#" className="muted small link  ">Esqueci minha senha</Link>
-          </div>
+         
 
           <div className="alignedItemsDiv">
             <div className="hint">Quer se tornar parceiro?

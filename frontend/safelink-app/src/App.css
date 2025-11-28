@@ -113,6 +113,17 @@ a:hover{opacity:.96;}
   flex-wrap: wrap;
 }
 
+.profile-row {
+  display: flex;
+  gap: var(--sp-4); 
+  flex-wrap: wrap;  
+  overflow: hidden;
+}
+
+.profile-row p {
+  flex: 1 1 45%; 
+}
+
 #tabs .brand-link{
   display:inline-flex; align-items:center; text-decoration:none;
   margin-right: auto;           

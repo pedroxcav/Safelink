@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import Section from "../components/Section";
 import Card from "../components/Card";
 import Button from "../components/UI/Button";
+import Input from "../components/Form/Input";
 import { UserContext } from "../components/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -98,7 +99,7 @@ if (!user) {
     
   
 return (
-    <Section title="Perfil" subtitle={`Bem-vindo, ${isUsuario ? user.nome : user.nomeFantasia || user.razaoSocial}!`}>
+    <Section title="Perfil" subtitle={`Bem-vindo, ${user.nome ? user.nome : user.razao}!`}>
       
       {showPopup && (
         <div className="popup">
@@ -112,26 +113,52 @@ return (
       <Card>
         {isUsuario && (
           <>
+          <div className="profile-row">
             <p><strong>Nome:</strong> {user.nome}</p>
+
             <p><strong>CPF:</strong> {user.cpf}</p>
-            <p><strong>E-mail:</strong> {user.email}</p>
-            <p><strong>Telefone:</strong> ({user.telefone?.ddd}) {user.telefone?.numero}</p>
+
+
+          </div>
+            <div className="profile-row">
+                
+
+                <p><strong>Telefone:</strong> ({user.telefone?.ddd}){user.telefone?.numero}</p>
+   
+                            <p><strong>E-mail:</strong> {user.email}</p>
+                            <Input type="text" placeholder="Mudar Email" disabled/>
+
+            </div>
           </>
         )}
 
         {!isUsuario && (
           <>
+          <div className="profile-row">
             <p><strong>Razão Social:</strong> {user.razao}</p>
             <p><strong>Nome Fantasia:</strong> {user.nome}</p>
+            
+          </div>
+          <div className="profile-row">
             <p><strong>CNPJ:</strong> {user.cnpj}</p>
             <p><strong>E-mail:</strong> {user.email}</p>
+          </div>
+          <div className="profile-row">
             <p><strong>Site:</strong> {user.site}</p>
             <p><strong>Telefone:</strong> ({user.telefone?.ddd}) {user.telefone?.numero}</p>
-          </>
+          </div>
+          <Input type="text" placeholder="Mudar Email" disabled/>
+          <Input type="text" placeholder="Mudar Nome Fantasia" disabled/>
+          <Input type="text" placeholder="Mudar Site" disabled/>
+            </>
         )}
+        
+        <div>
+          <Button style={{ width: "100%"}} >Atualizar</Button>
+        </div>
 
-        <div className="mt">
-          <Button onClick={handleLogout}>Sair</Button>
+        <div>
+          <Button style={{ width: "100%"}} onClick={handleLogout}>Sair</Button>
         </div>
       </Card>
     </Section>

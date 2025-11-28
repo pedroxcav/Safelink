@@ -8,7 +8,7 @@ import Button from '../components/UI/Button';
 
 export default function Report() {
   return (
-    <Section title="Relatar Golpe" subtitle="Conte o que aconteceu para gerarmos um guia de ação sob medida. (Protótipo)">
+    <Section title="Relatar Golpe" subtitle="Conte o que aconteceu para gerarmos um guia de ação sob medida.">
       <Card>
         <FormRow cols={2}>
           <FormField label="Tipo de golpe">
@@ -17,7 +17,6 @@ export default function Report() {
               <option>Roubo de credenciais</option>
               <option>Taxa de entrega</option>
               <option>Transferência PIX</option>
-              <option>Outro</option>
             </Select>
           </FormField>
 
@@ -34,11 +33,10 @@ export default function Report() {
         <div className="row grid-3">
           <span className="label">Você informou/digitou algum dado?</span>
           <div className="checks">
-            <label><input type="checkbox"/>Site</label>
-            <label><input type="checkbox"/>Telefone</label>
-            <label><input type="checkbox"/>PIX</label>
-            <label><input type="checkbox"/>Usuario</label>
-            <label><input type="checkbox"/>Outros</label>
+            <label><input type="radio" name="tipoRelato" value="site"/>Site</label>
+            <label><input type="radio" name="tipoRelato" value="telefone"/>Telefone</label>
+            <label><input type="radio" name="tipoRelato" value="pix"/>PIX</label>
+            <label><input type="radio" name="tipoRelato" value="usuario"/>Usuario</label>
           </div>
         </div>
 
