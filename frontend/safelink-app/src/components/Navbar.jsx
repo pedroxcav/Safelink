@@ -43,7 +43,7 @@ export default function Navbar() {
         
         {user && (
           <NavLink to="/perfil" className="tab">
-            Meu Perfil
+            Perfil
           </NavLink>
         )}
 

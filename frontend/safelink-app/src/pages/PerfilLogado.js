@@ -6,7 +6,7 @@ import Input from "../components/Form/Input";
 import { UserContext } from "../components/UserContext";
 import { useNavigate } from "react-router-dom";
 import ReportItem from '../components/Lists/ReportItem';
-import ResultHeader from '../components/ResultHeader';
+import { Link } from 'react-router-dom';
 
 export default function PerfilLogado() {
   const { user, setUser , logout } = useContext(UserContext);
@@ -287,9 +287,7 @@ return (
         {isUsuario &&(
             <>
  <div className="sample">
-             <ResultHeader pill={{ level:'mid', text:`${reports.length} relatos encontrados` }} />
- 
-             <h3 className="h3">Relatos recentes</h3>
+             <h3 className="h3">Meus relatos</h3>
              <ul className="reports">
                {reports.length === 0 && (
                  <p className="muted">Nenhum relato encontrado.</p>
@@ -307,9 +305,11 @@ return (
                  />
                ))}
              </ul>
+             <div className="between muted mt">
+              <span>Comunidade: {reports.length} relatos</span>
+              <Link className="link" to="/report">Criar denúncia</Link>
+            </div>
              </div>
-            
-
             </>
         )}
         </Card>  
