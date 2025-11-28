@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import Section from "../components/Section";
 import Card from "../components/Card";
 import Button from "../components/UI/Button";
+import Input from "../components/Form/Input";
 import { UserContext } from "../components/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -12,7 +13,8 @@ export default function PerfilLogado() {
   const [loading, setLoading] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState('');
-
+  const [linkDaEmpresa, setLinkDaEmpresa] = useState('');
+  const [links, setLinks] = useState([])
   function handleLogout() {
     setPopupMessage('Logout realizado com sucesso!');
     setShowPopup(true);
@@ -21,11 +23,44 @@ export default function PerfilLogado() {
     
   }
 
+  function gerarLinkEncurtado(){
+
+    const token = localStorage.getItem("user");
+
+    fetch("http://localhost:8080/link",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }, body: JSON.stringify({
+            linkReal: linkDaEmpresa
+        })
+    }).then((res) => {
+        if (!res.ok) throw new Error("Não autorizado");
+
+      }).then( () => {
+        return fetch("http://localhost:8080/link", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }}).then((res) => {
+            if (!res.ok) throw new Error("Não autorizado");
+            return res.json();
+        }).then((data)=>{
+            const linksEncurtados = data.map(link => link.linkEncurtado)
+
+            setLinks(linksEncurtados)
+        }).catch(err => console.error("Erro:", err))
+      })}
+
+    
+  
+
   const isUsuario = JSON.parse(localStorage.getItem("isUsuario"));
 
   useEffect(() => {
 
-    console.log(isUsuario)
     const token = localStorage.getItem("user");  
     if (!token) {
       
@@ -57,7 +92,7 @@ export default function PerfilLogado() {
         navigate("/login");
       });
     }else{
-        fetch("http://localhost:8080/empresa", {  // ajuste a rota conforme backend
+        fetch("http://localhost:8080/empresa", { 
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -78,14 +113,29 @@ export default function PerfilLogado() {
         navigate("/login");
       });
     }
+
+    fetch("http://localhost:8080/link", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }}).then((res) => {
+            if (!res.ok) throw new Error("Não autorizado");
+            return res.json();
+        }).then((data)=>{
+            const linksEncurtados = data.map(link => link.linkEncurtado)
+
+            setLinks(linksEncurtados)
+        }).catch(err => console.error("Erro:", err))
+
   }, [logout, navigate, setUser]);
 
 
 if (loading) {
-    return <Section title="Perfil">Carregando...</Section>;
+    return ( 
+    <Section title="Perfil">Carregando...</Section>
+    );
   }
-
-
 
 
 if (!user) {
@@ -95,10 +145,9 @@ if (!user) {
       </Section>
     );
   }
-    
   
 return (
-    <Section title="Perfil" subtitle={`Bem-vindo, ${isUsuario ? user.nome : user.nomeFantasia || user.razaoSocial}!`}>
+    <Section title="Perfil" subtitle={`Bem-vindo, ${user.nome ? user.nome : user.razao}!`}>
       
       {showPopup && (
         <div className="popup">
@@ -112,28 +161,80 @@ return (
       <Card>
         {isUsuario && (
           <>
+          <div className="profile-row">
             <p><strong>Nome:</strong> {user.nome}</p>
+
             <p><strong>CPF:</strong> {user.cpf}</p>
-            <p><strong>E-mail:</strong> {user.email}</p>
-            <p><strong>Telefone:</strong> ({user.telefone?.ddd}) {user.telefone?.numero}</p>
+
+
+          </div>
+            <div className="profile-row">
+                
+
+                <p><strong>Telefone:</strong> ({user.telefone?.ddd}){user.telefone?.numero}</p>
+   
+                            <p><strong>E-mail:</strong> {user.email}</p>
+                            <Input type="text" placeholder="Mudar Email" disabled/>
+
+            </div>
           </>
         )}
 
         {!isUsuario && (
           <>
+          <div className="profile-row">
             <p><strong>Razão Social:</strong> {user.razao}</p>
             <p><strong>Nome Fantasia:</strong> {user.nome}</p>
+            
+          </div>
+          <div className="profile-row">
             <p><strong>CNPJ:</strong> {user.cnpj}</p>
             <p><strong>E-mail:</strong> {user.email}</p>
+          </div>
+          <div className="profile-row">
             <p><strong>Site:</strong> {user.site}</p>
             <p><strong>Telefone:</strong> ({user.telefone?.ddd}) {user.telefone?.numero}</p>
-          </>
+          </div>
+          <Input type="text" placeholder="Mudar Email" disabled/>
+          <Input type="text" placeholder="Mudar Nome Fantasia" disabled/>
+          <Input type="text" placeholder="Mudar Site" disabled/>
+            </>
         )}
+        
+        <div>
+          <Button style={{ width: "100%"}} >Atualizar</Button>
+        </div>
 
-        <div className="mt">
-          <Button onClick={handleLogout}>Sair</Button>
+        <div>
+          <Button style={{ width: "100%"}} onClick={handleLogout}>Sair</Button>
         </div>
       </Card>
+
+      <Card style={{ marginTop: "1rem"}}>
+        {!isUsuario &&(
+            <>
+            <Input type="text" 
+            placeholder="Insira aqui o link a ser encurtado"
+            value={linkDaEmpresa}
+            onChange = {(e) => setLinkDaEmpresa(e.target.value)}/>
+            <Button onClick={gerarLinkEncurtado}>Gerar Link Encurtado</Button>
+            
+            <h1>Links encurtados</h1>
+            {links.length > 0 ? (
+  links.map((l, index) => (
+    <Card key={index}>
+      <p>{l}</p>
+    </Card>
+  ))
+) : (
+  <p style={{ marginTop: "1rem", color: "#777" }}>Sem links criados</p>
+)}
+            
+
+            </>
+        )}
+        </Card>  
+
     </Section>
   );
 }

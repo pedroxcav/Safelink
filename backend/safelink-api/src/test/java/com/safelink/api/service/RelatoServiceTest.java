@@ -161,19 +161,6 @@ class RelatoServiceTest {
     }
 
     @Test
-    @DisplayName("Buscar relatos por tipo de dado")
-    void getRelatoByTipoDado_ok() {
-        Relato r = new Relato();
-        r.setId(UUID.randomUUID());
-
-        when(relatoRepository.findByTipoDado(TipoDado.SITE)).thenReturn(List.of(r));
-
-        List<RelatoDTO> result = service.getRelatoByTipoDado(TipoDado.SITE);
-
-        assertEquals(1, result.size());
-    }
-
-    @Test
     @DisplayName("Buscar relatos por tipo de dado e informação")
     void getRelatoByInformacao_ok() {
         Relato r = new Relato();

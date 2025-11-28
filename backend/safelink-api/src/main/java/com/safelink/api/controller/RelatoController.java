@@ -1,6 +1,7 @@
 package com.safelink.api.controller;
 
 import com.safelink.api.controller.dto.ActionGuideDTO;
+import com.safelink.api.controller.dto.RankingItemDTO;
 import com.safelink.api.controller.dto.relato.NewRelatoDTO;
 import com.safelink.api.controller.dto.relato.RelatoDTO;
 import com.safelink.api.model.enums.TipoDado;
@@ -41,9 +42,9 @@ public class RelatoController {
     }
 
     @GetMapping("/dado")
-    public ResponseEntity<List<RelatoDTO>> getRelatosByTipoDado(@RequestParam("tipo") TipoDado tipoDado) {
-        List<RelatoDTO> relatos = relatoService.getRelatoByTipoDado(tipoDado);
-        return ResponseEntity.status(HttpStatus.OK).body(relatos);
+    public ResponseEntity<List<RankingItemDTO>> getRelatosByTipoDado(@RequestParam("tipo") TipoDado tipoDado) {
+        List<RankingItemDTO> sortedInformationDTO = relatoService.getRelatoByTipoDado(tipoDado);
+        return ResponseEntity.status(HttpStatus.OK).body(sortedInformationDTO);
     }
 
     @GetMapping("/verifica")
