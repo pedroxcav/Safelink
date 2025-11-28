@@ -113,7 +113,7 @@ export default function PerfilLogado() {
         navigate("/login");
       });
     }
-
+    if(!isUsuario){
     fetch("http://localhost:8080/link", {
         method: "GET",
         headers: {
@@ -126,7 +126,7 @@ export default function PerfilLogado() {
             const linksEncurtados = data.map(link => link.linkEncurtado)
 
             setLinks(linksEncurtados)
-        }).catch(err => console.error("Erro:", err))
+        }).catch(err => console.error("Erro:", err))}
 
   }, [logout, navigate, setUser]);
 
