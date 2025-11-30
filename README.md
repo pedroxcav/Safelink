@@ -1,4 +1,4 @@
-# 🔒 Safelink - Sistema Distribuído de Prevenção a Fraudes
+# 🔒 Safelink - Sistema de Prevenção a Fraudes
 
 <p align = "justify">
 O projeto <b>Safelink</b> foi concebido como uma plataforma comunitária robusta para a prevenção e combate a diferentes tipos de golpes e crimes digitais. A plataforma capacita usuários (<b>Clientes</b>) a se protegerem por meio de relatórios de incidentes, pesquisa de dados suspeitos e acesso a uma base de dados dos <b>top dados mais envolvidos em golpes</b>. Um diferencial central é a geração de um <b>Guia de Ação Personalizado</b>, utilizando o <b>Azure OpenAI</b>, para auxiliar vítimas no pós-golpe. Além disso, o sistema expande seu escopo para o setor corporativo (<b>Empresas</b>), oferecendo o serviço <b>Shortener</b>, um encurtador de links com domínio e selo de segurança da Safelink.
