@@ -30,14 +30,14 @@ O Safelink se comunica através de princípios REST, orquestrando três componen
 ## ☁️ Deploy
 
 <p align = "justify">
-A <b>API Principal</b> e seu banco de dados foram desenvolvidos para rodar localmente e de forma isolada usando <b>containers Docker</b>. Para iniciar todo o ambiente localmente (API e Database), basta utilizar o arquivo <b>docker-compose.yaml</b>.
+A <b>API Principal</b> e sua base foram desenvolvidos para rodar localmente e de forma isolada usando <b>Docker</b>. Para iniciar todo o ambiente localmente (API e Base), basta utilizar o arquivo <b>docker-compose.yaml</b>.
 
 <b>Coleção do Postman:</b>
 Você pode importar a coleção abaixo no seu cliente HTTP para testar as rotas da API Principal:
 
 - Postman Collection [Download](https://drive.google.com/file/d/1IkJnd025w6abr5pcLlnwY-JPXJ96YO3S/view?usp=sharing)
 
-O <b>Microsserviço Shortener</b> está implantado na nuvem e acessível de forma independente. O deploy foi realizado utilizando os serviços do <b>Render.com</b>, garantindo alta disponibilidade e sustentabilidade para as operações de encurtamento.
+O <b>Microsserviço Shortener</b> está em nuvem e acessível de forma independente. O deploy foi realizado utilizando os serviços do <b>Render.com</b>, garantindo alta disponibilidade para as operações de encurtamento.
 </p>
 
 ## ⚙️ Configuração
@@ -53,7 +53,7 @@ Antes de começar, você precisa ter instalado:
 -   **HTTP Client** (Para testar a API): [Download Postman](https://www.postman.com/downloads/)
 
 ### Variáveis de Ambiente
-Você precisará definir as variáveis de ambiente no arquivo **`.env`** que você deve criar em: `Safelink/backend/safelink-api`.
+Defina as variáveis de ambiente no arquivo **`.env`** que você deve criar em: `Safelink/backend/safelink-api`.
 
 * **Chaves de Segurança (Criptografia JWT):**
     ```
