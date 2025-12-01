@@ -193,9 +193,9 @@ Após esses passos, o sistema completo (Frontend se comunicando com a API Gatewa
 </details>
 
 ### Autor
-Project developed by Pedro Cavalcanti, Gabriel Moreno e Bruno Morais.
+Desenvolvido por Pedro Cavalcanti, Gabriel Moreno e Bruno Morais.
 
-Doubts or suggestions, message me here: 
+Dúvidas ou susgestões, me envie uma mmensagem: 
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2.svg?style=for-the-badge&logo=LinkedIn&logoColor=white)](https://www.linkedin.com/in/pedroxcav/)
 [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://www.instagram.com/pedroxcav/)
